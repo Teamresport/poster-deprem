@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Bölüm 01 — Giriş & Amaç</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal-dark:   #005e5e;
+  --teal-main:   #007878;
+  --teal-mid:    #28a0a0;
+  --teal-bright: #28b4b4;
+  --teal-light:  #dcf0f0;
+  --teal-xlight: #f0fafa;
+  --text-dark:   #0d2626;
+  --text-mid:    #2a4a4a;
+  --text-soft:   #5a7a7a;
+  --border:      #b0d8d8;
+  --font: 'Inter', Arial, sans-serif;
+}
+
+html, body {
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  background: #0a2020;
+  font-family: var(--font);
+  touch-action: none;
+}
+
+.poster {
+  position: fixed;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ── BUTONLAR ── */
+.fs-btn {
+  position: fixed; bottom: 1.5vh; right: 1.5vh; z-index: 9999;
+  background: var(--teal-main); color: #fff;
+  border: none; cursor: pointer; border-radius: 50%;
+  width: 6vh; height: 6vh; font-size: 2.5vh;
+  box-shadow: 0 0.4vh 1.6vh rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s; outline: none;
+}
+.fs-btn:hover { background: var(--teal-bright); }
+
+.back-btn {
+  position: fixed; bottom: 1.5vh; left: 1.5vh; z-index: 9999;
+  background: var(--teal-dark); color: #fff;
+  border: none; cursor: pointer; border-radius: 3vh;
+  padding: 0 2vw; height: 6vh; font-size: 1.6vh; font-weight: 600;
+  display: flex; align-items: center; gap: 0.8vh;
+  text-decoration: none; font-family: var(--font);
+  box-shadow: 0 0.4vh 1.6vh rgba(0,0,0,0.45);
+  transition: background .2s;
+}
+.back-btn:hover { background: var(--teal-main); }
+
+/* ════════════════════════════
+   HEADER
+════════════════════════════ */
+.header {
+  background: linear-gradient(135deg, var(--teal-main) 0%, var(--teal-bright) 100%);
+  display: flex; align-items: center; gap: 2vw;
+  padding: 1.2vh 3vw;
+  border-bottom: 0.5vh solid var(--teal-dark);
+  flex-shrink: 0; width: 100%;
+}
+.header-logo {
+  width: 10vh; height: 10vh; border-radius: 50%;
+  background: rgba(255,255,255,0.15); padding: 0.4vh;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  border: 0.3vh solid rgba(255,255,255,0.30);
+}
+.header-logo img { width: 9.2vh; height: 9.2vh; border-radius: 50%; object-fit: cover; display: block; }
+.header-center { flex: 1; text-align: center; min-width: 0; }
+.header-inst  { font-size: 2.2vh; font-weight: 800; color: rgba(255,255,255,.96); letter-spacing:.08vw; text-transform:uppercase; margin-bottom:.4vh; }
+.header-dept  { font-size: 1.7vh; font-weight: 500; color: rgba(255,255,255,.82); margin-bottom:.5vh; }
+.header-type  { display:inline-block; font-size:1.3vh; font-weight:700; letter-spacing:.18vw; text-transform:uppercase; color:var(--teal-dark); background:rgba(255,255,255,.90); padding:.4vh 1.5vw; border-radius:3vh; }
+.header-spacer { width: 10vh; flex-shrink:0; }
+
+/* ════════════════════════════
+   BÖLÜM BAŞLIĞI
+════════════════════════════ */
+.section-header {
+  background: var(--teal-dark);
+  display: flex; align-items: center; gap: 1.5vw;
+  padding: 1.2vh 3vw;
+  flex-shrink: 0; width: 100%;
+}
+.sec-badge {
+  font-size: 1vh; font-weight: 700; letter-spacing: .15vw; text-transform: uppercase;
+  color: var(--teal-bright); background: rgba(255,255,255,.1);
+  padding: .3vh 1vw; border-radius: 2vh; border: .1vh solid rgba(40,180,180,.4);
+  flex-shrink: 0;
+}
+.sec-title-main { font-size: 2.4vh; font-weight: 800; color: #fff; flex: 1; }
+.sec-subtitle   { font-size: 1.2vh; color: rgba(255,255,255,.65); flex-shrink: 0; }
+
+/* ════════════════════════════
+   CONTENT GRID
+   Sol: 1fr | Orta: 1.65fr | Sağ: 1fr
+   Her sütun kendi içinde 2 satır
+════════════════════════════ */
+.content {
+  flex: 1; min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1.9fr 0.85fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0;
+  padding: 1.2vh 1.5vw 1vh;
+  background: var(--teal-xlight);
+  width: 100%;
+}
+
+/* ── GENEL PANEL ── */
+.panel {
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  margin: .5vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.panel-header {
+  background: var(--teal-main);
+  padding: .65vh 1.1vw;
+  display: flex; align-items: center; gap: .5vw;
+  flex-shrink: 0;
+}
+.panel-icon  { font-size: 1.5vh; }
+.panel-title { font-size: 1.15vh; font-weight: 700; color: #fff; letter-spacing: .03vw; text-transform: uppercase; }
+.panel-body  { flex: 1; overflow: hidden; padding: .8vh 1vw; display: flex; flex-direction: column; }
+
+.panel.accent-1 .panel-header { background: var(--teal-dark); }
+.panel.accent-2 .panel-header { background: var(--teal-mid); }
+.panel.accent-3 .panel-header { background: #1a6b6b; }
+
+/* ════════════════════════════
+   ORTA ÜSTTE: 5 KAT PLANI
+   grid-column: 2, grid-row: 1
+════════════════════════════ */
+.plans-panel {
+  grid-column: 2;
+  grid-row: 1;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  margin: .5vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.plans-panel .panel-header { background: var(--teal-dark); padding: .65vh 1.1vw; display: flex; align-items: center; gap: .5vw; flex-shrink: 0; }
+.plans-row {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: .3vh .3vw;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Her bir kat planı kutusu */
+.plan-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 .25vw;
+  overflow: hidden;
+}
+.plan-label {
+  font-size: .95vh; font-weight: 700; color: var(--teal-dark);
+  text-align: center; margin-bottom: .3vh;
+  letter-spacing: .02vw; text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+
+.plan-img-wrap {
+  flex: 1;
+  width: 100%;
+  border: .12vh solid var(--border);
+  border-radius: .6vh;
+  overflow: hidden;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.plan-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .4vh;
+  color: var(--text-soft);
+}
+.plan-placeholder .pp-icon { font-size: 2.2vh; opacity: .5; }
+.plan-placeholder .pp-txt  { font-size: .85vh; opacity: .6; text-align: center; }
+
+/* ════════════════════════════
+   ORTA ALTTA: KESİT + FOTO
+   grid-column: 2, grid-row: 2
+════════════════════════════ */
+.views-panel {
+  grid-column: 2;
+  grid-row: 2;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  margin: .5vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.views-panel .panel-header { background: #1a6b6b; padding: .65vh 1.1vw; display: flex; align-items: center; gap: .5vw; flex-shrink: 0; }
+.views-row {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: .3vh .3vw;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Kesit hücreleri — eşit 3'e bölünür (kesit-1, kesit-2, foto) */
+.view-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 .3vw;
+  overflow: hidden;
+}
+.view-label {
+  font-size: .95vh; font-weight: 700; color: var(--teal-dark);
+  text-align: center; margin-bottom: .3vh;
+  letter-spacing: .02vw; text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+
+.view-img-wrap {
+  flex: 1;
+  width: 100%;
+  border: .12vh solid var(--border);
+  border-radius: .6vh;
+  overflow: hidden;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.view-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .4vh;
+  color: var(--text-soft);
+}
+.view-placeholder .vp-icon { font-size: 2.4vh; opacity: .45; }
+.view-placeholder .vp-txt  { font-size: .85vh; opacity: .6; text-align: center; line-height: 1.4; }
+
+/* ── BİNA KİMLİK TABLOSU ── */
+.kimlik-table { width: 100%; border-collapse: collapse; }
+.kimlik-table tr { border-bottom: .1vh solid var(--teal-light); }
+.kimlik-table tr:last-child { border-bottom: none; }
+.kimlik-table td { padding: .5vh .4vw; font-size: 1.1vh; line-height: 1.4; vertical-align: top; }
+.kimlik-table td:first-child {
+  font-weight: 700; color: var(--teal-dark); width: 42%;
+  font-size: 1.0vh; text-transform: uppercase; letter-spacing: .03vw; white-space: nowrap;
+}
+.kimlik-table td:last-child { color: var(--text-mid); font-weight: 500; }
+
+/* ── TBDY BADGE ── */
+.tbdy-block {
+  margin-top: auto; padding-top: .7vh;
+  background: var(--teal-dark);
+  border-radius: .7vh;
+  padding: .65vh .9vw;
+  display: flex; align-items: center; gap: .7vw;
+  flex-shrink: 0;
+}
+.tbdy-badge { font-size: 1.45vh; font-weight: 800; color: var(--teal-bright); white-space: nowrap; line-height: 1; }
+.tbdy-desc  { font-size: .95vh; color: rgba(255,255,255,.78); line-height: 1.4; }
+
+/* ── TEKNİK PARAMETRE SATIRLARI ── */
+.param-row {
+  display: flex; align-items: flex-start; gap: .5vw;
+  padding: .48vh 0;
+  border-bottom: .1vh solid var(--teal-light);
+}
+.param-row:last-child { border-bottom: none; }
+.param-label {
+  font-weight: 700; color: var(--teal-dark); text-transform: uppercase;
+  font-size: .95vh; letter-spacing: .02vw; white-space: nowrap; min-width: 8vw;
+}
+.param-val { color: var(--text-mid); font-size: 1.05vh; line-height: 1.45; }
+.param-val strong { color: var(--teal-dark); }
+
+/* ── AMAÇ MADDE LİSTESİ ── */
+.bullet-list { list-style: none; flex: 1; }
+.bullet-list li {
+  font-size: 1.05vh; color: var(--text-mid); line-height: 1.5;
+  padding: .4vh 0 .4vh 1.3vw; position: relative;
+  border-bottom: .1vh solid var(--teal-light);
+}
+.bullet-list li:last-child { border-bottom: none; }
+.bullet-list li::before {
+  content: ''; position: absolute; left: .3vw; top: .85vh;
+  width: .5vh; height: .5vh; border-radius: 50%;
+  background: var(--teal-bright);
+}
+.bullet-list li strong { color: var(--teal-dark); font-weight: 700; }
+
+/* ── ÇALIŞMA KAPSAMI ── */
+.kapsam-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: .45vh .45vw; flex: 1;
+}
+.kapsam-item {
+  background: var(--teal-xlight);
+  border: .15vh solid var(--border);
+  border-radius: .6vh;
+  padding: .5vh .65vw;
+  display: flex; align-items: center; gap: .4vw;
+}
+.kapsam-item .ki-icon { font-size: 1.4vh; flex-shrink: 0; }
+.kapsam-item .ki-text { font-size: .95vh; color: var(--text-mid); line-height: 1.35; font-weight: 500; }
+
+/* ── FOOTER ── */
+.poster-footer {
+  background: var(--teal-light); border-top: .4vh solid var(--teal-bright);
+  padding: .9vh 3vw;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0; width: 100%;
+}
+.footer-left { font-size: 1.3vh; color: var(--teal-dark); }
+.footer-left strong { color: var(--teal-main); font-weight: 700; }
+.nav-dots { display: flex; gap: .5vw; align-items: center; }
+.nav-dot {
+  width: 1.2vh; height: 1.2vh; border-radius: 50%;
+  background: var(--border); cursor: pointer; transition: background .15s;
+  text-decoration: none; display: block;
+}
+.nav-dot.active { background: var(--teal-main); }
+.nav-dot:hover  { background: var(--teal-mid); }
+
+@media print {
+  html, body { background: #fff; overflow: visible; }
+  .poster { position: static; width: 100% !important; height: auto !important; }
+  .fs-btn, .back-btn { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="back-btn" href="poster_anasayfa.html">← Ana Sayfa</a>
+<button class="fs-btn" onclick="toggleFS()">⛶</button>
+
+<div class="poster" id="poster">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-logo">
+      <img src="logo.png" alt="Balıkesir Üniversitesi" style="width:9.2vh;height:9.2vh;border-radius:50%;object-fit:cover;display:block;">
+    </div>
+    <div class="header-center">
+      <div class="header-inst">T.C. Balıkesir Üniversitesi</div>
+      <div class="header-dept">Mühendislik Fakültesi — İnşaat Mühendisliği Bölümü</div>
+      <span class="header-type">Lisans Bitirme Çalışması</span>
+    </div>
+    <div class="header-spacer"></div>
+  </header>
+
+  <!-- BÖLÜM BAŞLIĞI -->
+  <div class="section-header">
+    <span class="sec-badge">Bölüm 01 / 06</span>
+    <span class="sec-title-main">Giriş &amp; Amaç</span>
+    <span class="sec-subtitle">Bina Tanımı · Mimari Planlar · Teknik Parametreler</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       İÇERİK ALANI
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content">
+
+    <!-- ─────────────────────────────
+         SOL ÜST: Bina Kimliği
+    ────────────────────────────── -->
+    <div class="panel accent-1">
+      <div class="panel-header">
+        <span class="panel-icon">🏛</span>
+        <span class="panel-title">Bina Kimliği</span>
+      </div>
+      <div class="panel-body">
+        <table class="kimlik-table">
+          <tr><td>Kullanım Amacı</td> <td>Konut — BKS-3</td></tr>
+          <tr><td>Yapım Yılı</td>     <td>2013</td></tr>
+          <tr><td>Taşıyıcı Sistem</td><td>Perdeli Betonarme Çerçeve</td></tr>
+          <tr><td>Kat Düzeni</td>     <td>Bodrum + Zemin + 3 Normal Kat</td></tr>
+          <tr><td>Beton Sınıfı</td>   <td>C20 (Mevcut Ortalama)</td></tr>
+          <tr><td>Donatı Çeliği</td>  <td>S220 / S420</td></tr>
+          <tr><td>Bilgi Düzeyi</td>   <td>Kapsamlı — BDK = 1.0</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────
+         ORTA ÜST: 5 KAT PLANI (grid-column:2, grid-row:1)
+    ────────────────────────────────────────────────────── -->
+    <div class="plans-panel">
+      <div class="panel-header">
+        <span class="panel-icon">📐</span>
+        <span class="panel-title" style="color:#fff;">Kat Planları</span>
+      </div>
+      <div class="plans-row">
+        <div class="plan-cell">
+          <div class="plan-label">Bodrum Kat</div>
+          <div class="plan-img-wrap"><img src="b-1-1.png" alt="Bodrum Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+        <div class="plan-cell">
+          <div class="plan-label">Zemin Kat</div>
+          <div class="plan-img-wrap"><img src="b-1-2.png" alt="Zemin Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+        <div class="plan-cell">
+          <div class="plan-label">1. Normal Kat</div>
+          <div class="plan-img-wrap"><img src="b-1-3.png" alt="1. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+        <div class="plan-cell">
+          <div class="plan-label">2. Normal Kat</div>
+          <div class="plan-img-wrap"><img src="b-1-4.png" alt="2. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+        <div class="plan-cell">
+          <div class="plan-label">3. Normal Kat</div>
+          <div class="plan-img-wrap"><img src="b-1-5.png" alt="3. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+        <div class="plan-cell">
+          <div class="plan-label">Çatı Katı</div>
+          <div class="plan-img-wrap"><img src="b-1-6.png" alt="Çatı Katı Planı" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+      </div><!-- /plans-row -->
+    </div><!-- /plans-panel -->
+
+    <!-- ─────────────────────────────
+         SAĞ ÜST: Çalışmanın Amacı
+    ────────────────────────────── -->
+    <div class="panel accent-2">
+      <div class="panel-header">
+        <span class="panel-icon">🎯</span>
+        <span class="panel-title">Çalışmanın Amacı</span>
+      </div>
+      <div class="panel-body">
+        <ul class="bullet-list">
+          <li>Mevcut taşıyıcı sistemin <strong>yapısal davranışını</strong> tespit etmek</li>
+          <li>TBDY 2018 Bölüm 15 kapsamında <strong>deprem performansını</strong> değerlendirmek</li>
+          <li><strong>DD-2 yer hareketi</strong> altında beklenen performans düzeyini belirlemek</li>
+          <li>Zayıf elemanları ve <strong>hasar kaynaklarını</strong> ortaya koymak</li>
+          <li>Uygun <strong>güçlendirme yöntemlerini</strong> önermek ve boyutlandırmak</li>
+          <li>Güçlendirme sonrası <strong>performans iyileşmesini</strong> doğrulamak</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────
+         SOL ALT: Teknik Parametreler
+    ────────────────────────────── -->
+    <div class="panel accent-3">
+      <div class="panel-header">
+        <span class="panel-icon">⚙️</span>
+        <span class="panel-title">Teknik Parametreler</span>
+      </div>
+      <div class="panel-body">
+        <div class="param-row">
+          <span class="param-label">Zemin Sınıfı</span>
+          <span class="param-val"><strong>ZD</strong> — Orta Sıkı / Sert Kil</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Deprem Düzeyi</span>
+          <span class="param-val"><strong>DD-2</strong> — 50 yılda %10 aşılma</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Perf. Hedefi</span>
+          <span class="param-val"><strong>Kontrollü Hasar (KH)</strong></span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Analiz Türü</span>
+          <span class="param-val">Doğrusal Olmayan Artımsal İtme (Pushover)</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Yazılım</span>
+          <span class="param-val">SeismoStruct — Fiber Kesit Modeli</span>
+        </div>
+        <div class="tbdy-block">
+          <span class="tbdy-badge">TBDY 2018</span>
+          <span class="tbdy-desc">Bölüm 15 — Mevcut Binaların<br>Değerlendirilmesi ve Güçlendirilmesi</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────────────────────
+         ORTA ALT: 2 KESİT + CEPHE FOTO (grid-column:2, grid-row:2)
+    ──────────────────────────────────────────────────────── -->
+    <div class="views-panel">
+      <div class="panel-header">
+        <span class="panel-icon">✂️</span>
+        <span class="panel-title" style="color:#fff;">Kesitler &amp; Cephe</span>
+      </div>
+      <div class="views-row">
+        <div class="view-cell">
+          <div class="view-label">1-1 Kesiti</div>
+          <div class="view-img-wrap"><img src="b-1-7.png" alt="1-1 Kesiti" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+        <div class="view-cell">
+          <div class="view-label">2-2 Kesiti</div>
+          <div class="view-img-wrap"><img src="b-1-8.png" alt="2-2 Kesiti" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+        </div>
+        <div class="view-cell">
+          <div class="view-label">Cephe Fotoğrafı</div>
+          <div class="view-img-wrap"><img src="b-1-9.png" alt="Cephe Fotoğrafı" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"></div>
+        </div>
+      </div><!-- /views-row -->
+    </div><!-- /views-panel -->
+
+    <!-- ─────────────────────────────
+         SAĞ ALT: Çalışma Kapsamı
+    ────────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-icon">🔍</span>
+        <span class="panel-title">Çalışma Kapsamı</span>
+      </div>
+      <div class="panel-body">
+        <div class="kapsam-grid">
+          <div class="kapsam-item">
+            <span class="ki-icon">📚</span>
+            <span class="ki-text">Literatür araştırması</span>
+          </div>
+          <div class="kapsam-item">
+            <span class="ki-icon">🖥️</span>
+            <span class="ki-text">SeismoStruct ile yapısal modelleme</span>
+          </div>
+          <div class="kapsam-item">
+            <span class="ki-icon">📊</span>
+            <span class="ki-text">Deprem performans analizi</span>
+          </div>
+          <div class="kapsam-item">
+            <span class="ki-icon">⚠️</span>
+            <span class="ki-text">Yetersizliklerin tespiti</span>
+          </div>
+          <div class="kapsam-item">
+            <span class="ki-icon">🔧</span>
+            <span class="ki-text">Güçlendirme tasarımı</span>
+          </div>
+          <div class="kapsam-item">
+            <span class="ki-icon">✅</span>
+            <span class="ki-text">Güçlendirilmiş yapı analizi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- FOOTER -->
+  <div class="poster-footer">
+    <div class="footer-left">
+      <strong>Serhat Kayar</strong> &nbsp;·&nbsp; Danışman: Dr. Öğr. Üyesi Erkan Töre &nbsp;·&nbsp; Balıkesir Üniversitesi &nbsp;·&nbsp; Şubat 2026
+    </div>
+    <div class="nav-dots">
+      <a class="nav-dot active" href="poster_anasayfa.html" title="Ana Sayfa"></a>
+      <a class="nav-dot active" href="poster_b1_giris.html" title="B1 Giriş"></a>
+      <a class="nav-dot" href="poster_b2_model.html"        title="B2 Model"></a>
+      <a class="nav-dot" href="poster_b3_once.html"         title="B3 Önce"></a>
+      <a class="nav-dot" href="poster_b4_guclendirme.html"  title="B4 Güçlendirme"></a>
+      <a class="nav-dot" href="poster_b5_sonra.html"        title="B5 Sonra"></a>
+      <a class="nav-dot" href="poster_b6_sonuc.html"        title="B6 Sonuç"></a>
+    </div>
+  </div>
+
+</div><!-- /poster -->
+
+<script>
+  function fitPoster() {
+    var W = 2646, H = 1323;
+    var vw = document.fullscreenElement ? screen.width  : window.innerWidth;
+    var vh = document.fullscreenElement ? screen.height : window.innerHeight;
+    var w, h;
+    if (vw / vh >= 2) { h = vh; w = vh * 2; }
+    else              { w = vw; h = vw / 2; }
+    var p = document.getElementById('poster');
+    p.style.width  = w + 'px';
+    p.style.height = h + 'px';
+    p.style.left   = ((vw - w) / 2) + 'px';
+    p.style.top    = ((vh - h) / 2) + 'px';
+  }
+  fitPoster();
+  window.addEventListener('resize', fitPoster);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fitPoster);
+
+  function toggleFS() {
+    if (!document.fullscreenElement)
+      document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(()=>{});
+    else document.exitFullscreen();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'F11') { e.preventDefault(); toggleFS(); } });
+  document.addEventListener('fullscreenchange', () => setTimeout(fitPoster, 80));
+</script>
+</body>
+</html>

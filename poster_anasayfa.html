@@ -434,21 +434,18 @@
 
 </div><!-- /poster -->
 
-<script>
+  <script>
   function fitPoster() {
     var vw = document.fullscreenElement ? screen.width  : window.innerWidth;
     var vh = document.fullscreenElement ? screen.height : window.innerHeight;
-    var W = 1920, H = 960;
-    var scale = Math.min(vw / W, vh / H);
-    var w = W * scale;
-    var h = H * scale;
+    var w, h;
+    if (vw / vh >= 2) { h = vh; w = vh * 2; }
+    else              { w = vw; h = vw / 2; }
     var p = document.getElementById('poster');
-    p.style.width  = W + 'px';
-    p.style.height = H + 'px';
+    p.style.width  = w + 'px';
+    p.style.height = h + 'px';
     p.style.left   = ((vw - w) / 2) + 'px';
     p.style.top    = ((vh - h) / 2) + 'px';
-    p.style.transform = 'scale(' + scale + ')';
-    p.style.transformOrigin = 'top left';
   }
   fitPoster();
   window.addEventListener('resize', fitPoster);

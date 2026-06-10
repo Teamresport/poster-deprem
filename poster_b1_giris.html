@@ -113,7 +113,7 @@ html, body {
 .content {
   flex: 1; min-height: 0;
   display: grid;
-  grid-template-columns: 1fr 1.9fr 0.85fr;
+  grid-template-columns: 1fr 1.9fr;
   grid-template-rows: 1fr 1fr;
   gap: 0;
   padding: 1.2vh 1.5vw 1vh;
@@ -395,7 +395,7 @@ html, body {
     <!-- ─────────────────────────────
          SOL ÜST: Bina Kimliği
     ────────────────────────────── -->
-    <div class="panel accent-1">
+    <div class="panel accent-1" style="grid-column:1; grid-row:2;">
       <div class="panel-header">
         <span class="panel-icon">🏛</span>
         <span class="panel-title">Bina Kimliği</span>
@@ -452,7 +452,7 @@ html, body {
     <!-- ─────────────────────────────
          SAĞ ÜST: Çalışmanın Amacı
     ────────────────────────────── -->
-    <div class="panel accent-2">
+    <div class="panel accent-2" style="grid-column:1; grid-row:1;">  
       <div class="panel-header">
         <span class="panel-icon">🎯</span>
         <span class="panel-title">Çalışmanın Amacı</span>
@@ -529,43 +529,6 @@ html, body {
       </div><!-- /views-row -->
     </div><!-- /views-panel -->
 
-    <!-- ─────────────────────────────
-         SAĞ ALT: Çalışma Kapsamı
-    ────────────────────────────── -->
-    <div class="panel">
-      <div class="panel-header">
-        <span class="panel-icon">🔍</span>
-        <span class="panel-title">Çalışma Kapsamı</span>
-      </div>
-      <div class="panel-body">
-        <div class="kapsam-grid">
-          <div class="kapsam-item">
-            <span class="ki-icon">📚</span>
-            <span class="ki-text">Literatür araştırması</span>
-          </div>
-          <div class="kapsam-item">
-            <span class="ki-icon">🖥️</span>
-            <span class="ki-text">SeismoStruct ile yapısal modelleme</span>
-          </div>
-          <div class="kapsam-item">
-            <span class="ki-icon">📊</span>
-            <span class="ki-text">Deprem performans analizi</span>
-          </div>
-          <div class="kapsam-item">
-            <span class="ki-icon">⚠️</span>
-            <span class="ki-text">Yetersizliklerin tespiti</span>
-          </div>
-          <div class="kapsam-item">
-            <span class="ki-icon">🔧</span>
-            <span class="ki-text">Güçlendirme tasarımı</span>
-          </div>
-          <div class="kapsam-item">
-            <span class="ki-icon">✅</span>
-            <span class="ki-text">Güçlendirilmiş yapı analizi</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div><!-- /content -->
 

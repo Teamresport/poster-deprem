@@ -164,7 +164,7 @@
   .sections-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
     padding: 0.5vh 1.2vw 0.8vh;
-    gap: 0; flex: 1; min-height: 0; overflow: hidden;
+    gap: 0; flex: 1; min-height: 0; max-height: calc(100% - 4vh);
     width: 100%;
   }
 
@@ -233,11 +233,11 @@
   ══════════════════════════ */
   .poster-footer {
     background: var(--teal-light); border-top: 0.4vh solid var(--teal-bright);
-    padding: 1vh 3vw;
+    padding: 0.5vh 3vw;
     display: flex; align-items: center; justify-content: space-between;
     flex-shrink: 0; width: 100%;
   }
-  .footer-left { font-size: 1.5vh; color: var(--teal-dark); }
+  .footer-left { font-size: 1.1vh; color: var(--teal-dark); white-space: nowrap; }
   .footer-left strong { color: var(--teal-main); font-weight: 700; }
   .nav-dots { display: flex; gap: 0.5vw; align-items: center; }
   .nav-dot {

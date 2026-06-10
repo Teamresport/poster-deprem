@@ -434,31 +434,62 @@
 
 </div><!-- /poster -->
 
-  <script>
+<script>
+  // ── POSTER: 2:1 oran, tam ekranı doldur, kaydırma yok ──
   function fitPoster() {
-    var vw = document.fullscreenElement ? screen.width  : window.innerWidth;
-    var vh = document.fullscreenElement ? screen.height : window.innerHeight;
-    var w, h;
-    if (vw / vh >= 2) { h = vh; w = vh * 2; }
-    else              { w = vw; h = vw / 2; }
+    var sw = window.screen.width;
+    var sh = window.screen.height;
+
+    // Tam ekran mı? Screen mi, window mu kullan?
+    var vw, vh;
+    if (document.fullscreenElement) {
+      vw = sw; vh = sh;
+    } else {
+      vw = window.innerWidth;
+      vh = window.innerHeight;
+    }
+
     var p = document.getElementById('poster');
+
+    // 2:1 oran: genişlik öncelikli
+    var size = Math.min(vw, vh);
+    p.style.width  = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left   = ((vw - size) / 2) + 'px';
+    p.style.top    = ((vh - size) / 2) + 'px';
+
     p.style.width  = w + 'px';
     p.style.height = h + 'px';
     p.style.left   = ((vw - w) / 2) + 'px';
     p.style.top    = ((vh - h) / 2) + 'px';
+    p.style.transform = '';
   }
+
   fitPoster();
   window.addEventListener('resize', fitPoster);
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', fitPoster);
-  function toggleFS() {
-    if (!document.fullscreenElement)
-      document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(function(){});
-    else document.exitFullscreen();
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', fitPoster);
   }
+
+  // ── TAM EKRAN ──
+  function toggleFS() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen({ navigationUI: 'hide' })
+        .catch(function(){});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
   document.addEventListener('keydown', function(e) {
     if (e.key === 'F11') { e.preventDefault(); toggleFS(); }
   });
+
   document.addEventListener('fullscreenchange', function() {
     setTimeout(fitPoster, 80);
   });
 </script>
+
+</body>
+</html>
+

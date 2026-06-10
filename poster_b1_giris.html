@@ -589,14 +589,15 @@ html, body {
 
 <script>
   function fitPoster() {
-    var W = 2646, H = 1323;
     var vw = document.fullscreenElement ? screen.width  : window.innerWidth;
     var vh = document.fullscreenElement ? screen.height : window.innerHeight;
-  var size = Math.min(vw, vh);
-  p.style.width  = size + 'px';
-  p.style.height = size + 'px';
-  p.style.left   = ((vw - size) / 2) + 'px';
-  p.style.top    = ((vh - size) / 2) + 'px';
+    var size = Math.min(vw, vh);
+    var p = document.getElementById('poster');
+    p.style.width  = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left   = ((vw - size) / 2) + 'px';
+    p.style.top    = ((vh - size) / 2) + 'px';
+  }
   fitPoster();
   window.addEventListener('resize', fitPoster);
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fitPoster);

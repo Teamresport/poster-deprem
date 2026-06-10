@@ -435,60 +435,33 @@
 </div><!-- /poster -->
 
 <script>
-  // ── POSTER: 2:1 oran, tam ekranı doldur, kaydırma yok ──
   function fitPoster() {
-    var sw = window.screen.width;
-    var sh = window.screen.height;
-
-    // Tam ekran mı? Screen mi, window mu kullan?
-    var vw, vh;
-    if (document.fullscreenElement) {
-      vw = sw; vh = sh;
-    } else {
-      vw = window.innerWidth;
-      vh = window.innerHeight;
-    }
-
+    var vw = document.fullscreenElement ? screen.width  : window.innerWidth;
+    var vh = document.fullscreenElement ? screen.height : window.innerHeight;
+    var W = 1920, H = 960;
+    var scale = Math.min(vw / W, vh / H);
+    var w = W * scale;
+    var h = H * scale;
     var p = document.getElementById('poster');
-
-    // 2:1 oran: genişlik öncelikli
-    var size = Math.min(vw, vh);
-    p.style.width  = size + 'px';
-    p.style.height = size + 'px';
-    p.style.left   = ((vw - size) / 2) + 'px';
-    p.style.top    = ((vh - size) / 2) + 'px';
-
-    p.style.width  = w + 'px';
-    p.style.height = h + 'px';
+    p.style.width  = W + 'px';
+    p.style.height = H + 'px';
     p.style.left   = ((vw - w) / 2) + 'px';
     p.style.top    = ((vh - h) / 2) + 'px';
-    p.style.transform = '';
+    p.style.transform = 'scale(' + scale + ')';
+    p.style.transformOrigin = 'top left';
   }
-
   fitPoster();
   window.addEventListener('resize', fitPoster);
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', fitPoster);
-  }
-
-  // ── TAM EKRAN ──
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fitPoster);
   function toggleFS() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen({ navigationUI: 'hide' })
-        .catch(function(){});
-    } else {
-      document.exitFullscreen();
-    }
+    if (!document.fullscreenElement)
+      document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(function(){});
+    else document.exitFullscreen();
   }
-
   document.addEventListener('keydown', function(e) {
     if (e.key === 'F11') { e.preventDefault(); toggleFS(); }
   });
-
   document.addEventListener('fullscreenchange', function() {
     setTimeout(fitPoster, 80);
   });
 </script>
-
-</body>
-</html>

@@ -162,7 +162,7 @@
      GRID — 6 kart yan yana
   ══════════════════════════ */
   .sections-grid {
-    display: grid; grid-template-columns: repeat(6, 1fr);
+    display: grid; grid-template-columns: repeat(3, 1fr);
     padding: 0.5vh 1.2vw 0.8vh;
     gap: 0; flex: 1; min-height: 0;
     width: 100%;
@@ -432,16 +432,11 @@
     var p = document.getElementById('poster');
 
     // 2:1 oran: genişlik öncelikli
-    var w, h;
-    if (vw / vh >= 2) {
-      // Ekran zaten 2:1 veya daha geniş → yüksekliğe göre ayarla
-      h = vh;
-      w = vh * 2;
-    } else {
-      // Ekran 2:1'den dar → genişliğe göre ayarla
-      w = vw;
-      h = vw / 2;
-    }
+    var size = Math.min(vw, vh);
+    p.style.width  = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left   = ((vw - size) / 2) + 'px';
+    p.style.top    = ((vh - size) / 2) + 'px';
 
     p.style.width  = w + 'px';
     p.style.height = h + 'px';

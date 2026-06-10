@@ -424,27 +424,27 @@ html, body {
       <div class="plans-row">
         <div class="plan-cell">
           <div class="plan-label">Bodrum Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-1.PNG" alt="Bodrum Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="plan-img-wrap"><img src="images/b-1-1.PNG" alt="Bodrum Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="plan-cell">
           <div class="plan-label">Zemin Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-2.PNG" alt="Zemin Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="plan-img-wrap"><img src="images/b-1-2.PNG" alt="Zemin Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="plan-cell">
           <div class="plan-label">1. Normal Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-3.PNG" alt="1. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="plan-img-wrap"><img src="images/b-1-3.PNG" alt="1. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="plan-cell">
           <div class="plan-label">2. Normal Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-4.PNG" alt="2. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="plan-img-wrap"><img src="images/b-1-4.PNG" alt="2. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="plan-cell">
           <div class="plan-label">3. Normal Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-5.PNG" alt="3. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="plan-img-wrap"><img src="images/b-1-5.PNG" alt="3. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="plan-cell">
           <div class="plan-label">Çatı Katı</div>
-          <div class="plan-img-wrap"><img src="images/b-1-6.PNG" alt="Çatı Katı Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="plan-img-wrap"><img src="images/b-1-6.PNG" alt="Çatı Katı Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'""></div>
         </div>
       </div><!-- /plans-row -->
     </div><!-- /plans-panel -->
@@ -516,15 +516,15 @@ html, body {
       <div class="views-row">
         <div class="view-cell">
           <div class="view-label">1-1 Kesiti</div>
-          <div class="view-img-wrap"><img src="images/b-1-7.PNG" alt="1-1 Kesiti" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="view-img-wrap"><img src="images/b-1-7.PNG" alt="1-1 Kesiti" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="view-cell">
           <div class="view-label">2-2 Kesiti</div>
-          <div class="view-img-wrap"><img src="images/b-1-8.PNG" alt="2-2 Kesiti" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="view-img-wrap"><img src="images/b-1-8.PNG" alt="2-2 Kesiti" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="view-cell">
           <div class="view-label">Cephe Fotoğrafı</div>
-          <div class="view-img-wrap"><img src="images/b-1-9.PNG" alt="Cephe Fotoğrafı" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onclick="this.requestFullscreen()"></div>
+          <div class="view-img-wrap"><img src="images/b-1-9.PNG" alt="Cephe Fotoğrafı" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
       </div><!-- /views-row -->
     </div><!-- /views-panel -->
@@ -573,5 +573,8 @@ html, body {
   document.addEventListener('keydown', e => { if (e.key === 'F11') { e.preventDefault(); toggleFS(); } });
   document.addEventListener('fullscreenchange', () => setTimeout(fitPoster, 80));
 </script>
+<div id="lb" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99999;align-items:center;justify-content:center;">
+  <img id="lb-img" style="max-width:90vw;max-height:90vh;border-radius:8px;">
+</div>
 </body>
 </html>

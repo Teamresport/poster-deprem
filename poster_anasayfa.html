@@ -252,16 +252,22 @@
 
   /* ── KART GÖRSELLERİ ── */
   .sec-img-wrap {
-    width: 100%; overflow: hidden;
-    border-radius: 0.5vh; margin-bottom: 0.8vh;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.5vh;
+    margin-bottom: 0.8vh;
     flex-shrink: 0;
-    background: #0;
-    max-height: 20vh;
-    display: flex; align-items: center; justify-content: center;
+    background: transparent;
+    aspect-ratio: 16 / 9;   /* ← sabit oran, her boyuta uyar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .sec-img {
-    width: 100%; height: 100%;
-    object-fit: contain; object-position: center top;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       /* ← contain yerine cover, kırpılmaz */
+    object-position: center;
     display: block;
   }
   .sec-img-double {

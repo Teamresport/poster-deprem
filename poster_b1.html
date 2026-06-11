@@ -402,13 +402,16 @@ html, body {
       </div>
       <div class="panel-body">
         <table class="kimlik-table">
-          <tr><td>Kullanım Amacı</td> <td>Konut — BKS-3</td></tr>
-          <tr><td>Yapım Yılı</td>     <td>2013</td></tr>
-          <tr><td>Taşıyıcı Sistem</td><td>Perdeli Betonarme Çerçeve</td></tr>
-          <tr><td>Kat Düzeni</td>     <td>Bodrum + Zemin + 3 Normal Kat</td></tr>
-          <tr><td>Beton Sınıfı</td>   <td>C20 (Mevcut Ortalama)</td></tr>
-          <tr><td>Donatı Çeliği</td>  <td>S220 / S420</td></tr>
-          <tr><td>Bilgi Düzeyi</td>   <td>Kapsamlı — BDK = 1.0</td></tr>
+          <tr><td>Kullanım Amacı</td>  <td>Konut — BKS-3</td></tr>
+          <tr><td>Yapım Yılı</td>      <td>2013</td></tr>
+          <tr><td>Taşıyıcı Sistem</td> <td>Perdeli Betonarme Çerçeve</td></tr>
+          <tr><td>Kat Düzeni</td>      <td>Bodrum + Zemin + 3 Normal Kat + Çatı</td></tr>
+          <tr><td>Bina Yüksekliği</td> <td><strong>15.12 m</strong> (zemin tabanından çatıya)</td></tr>
+          <tr><td>İnşaat Alanı</td>    <td><strong>865.90 m²</strong></td></tr>
+          <tr><td>Plan Boyutları</td>  <td>X: 8.00 m &nbsp;/&nbsp; Y: 17.20 m</td></tr>
+          <tr><td>Beton Sınıfı</td>    <td>C20 (Mevcut Ortalama)</td></tr>
+          <tr><td>Donatı Çeliği</td>   <td>S220 / S420</td></tr>
+          <tr><td>Bilgi Düzeyi</td>    <td>Kapsamlı — BDK = 1.0</td></tr>
         </table>
       </div>
     </div>
@@ -462,14 +465,16 @@ html, body {
         <span class="panel-icon">🎯</span>
         <span class="panel-title">Çalışmanın Amacı</span>
       </div>
-      <div class="panel-body">
-        <ul class="bullet-list">
-          <li>Mevcut taşıyıcı sistemin <strong>yapısal davranışını</strong> tespit etmek</li>
-          <li>TBDY 2018 Bölüm 15 kapsamında <strong>deprem performansını</strong> değerlendirmek</li>
-          <li><strong>DD-2 yer hareketi</strong> altında beklenen performans düzeyini belirlemek</li>
-          <li>Zayıf elemanları ve <strong>hasar kaynaklarını</strong> ortaya koymak</li>
-          <li>Uygun <strong>güçlendirme yöntemlerini</strong> önermek ve boyutlandırmak</li>
-          <li>Güçlendirme sonrası <strong>performans iyileşmesini</strong> doğrulamak</li>
+      <div class="panel-body" style="gap:.4vh;">
+        <p style="font-size:1.05vh;color:var(--text-mid);line-height:1.55;margin-bottom:.5vh;">
+          Bu çalışma; mevcut bir konut binasının <strong>TBDY 2018 Bölüm 15</strong> kapsamında deprem performansının değerlendirilmesini ve <strong>yenilikçi güçlendirme yöntemleriyle</strong> iyileştirilmesini kapsamaktadır.
+        </p>
+        <ul class="bullet-list" style="gap:.35vh;">
+          <li>Mevcut taşıyıcı sistemin geometrik ve malzeme özelliklerinin <strong>proje ve rölöve çalışmalarıyla</strong> belgelenmesi</li>
+          <li><strong>DD-2 deprem düzeyi</strong> (50 yılda %10 aşılma) için <strong>Kontrollü Hasar (KH)</strong> performans hedefinin sağlanıp sağlanmadığının araştırılması</li>
+          <li><strong>Doğrusal olmayan Pushover analizi</strong> ile yumuşak kat davranışı, hasar mekanizmaları ve kritik elemanların tespiti</li>
+          <li><strong>BRB (Burkulması Önlenmiş Çelik Çapraz)</strong> ve <strong>KLP (Kolon Lifli Polimer Sarma)</strong> yöntemleriyle yenilikçi güçlendirme tasarımının geliştirilmesi</li>
+          <li>Güçlendirme sonrası yapının <strong>KH performans hedefini</strong> sağladığının analitik olarak doğrulanması</li>
         </ul>
       </div>
     </div>
@@ -489,7 +494,19 @@ html, body {
         </div>
         <div class="param-row">
           <span class="param-label">Deprem Düzeyi</span>
-          <span class="param-val"><strong>DD-2</strong> — 50 yılda %10 aşılma</span>
+          <span class="param-val"><strong>DD-2</strong> — 50 yılda %10 aşılma (T = 475 yıl)</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">S<sub>DS</sub> / S<sub>D1</sub></span>
+          <span class="param-val"><strong>1.089 g</strong> / <strong>0.491 g</strong></span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Deprem Tas. Sınıfı</span>
+          <span class="param-val"><strong>DTS-1</strong> — Yüksek Sismik Risk Bölgesi</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Bina Yük. Sınıfı</span>
+          <span class="param-val"><strong>BYS-6</strong> — H<sub>N</sub> = 15.12 m</span>
         </div>
         <div class="param-row">
           <span class="param-label">Perf. Hedefi</span>

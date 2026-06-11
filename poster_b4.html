@@ -502,14 +502,14 @@ html, body {
           </thead>
           <tbody>
             <tr>
-              <td>Burkulması Önlenmiş Çelik Çapraz</td>
+              <td>Burkulması Önlenmiş Çelik Çaprazlı Çerçeve</td>
               <td>Yanal rijitlik ve dayanım artırımı</td>
               <td>Bodrum ve zemin katta seçilen açıklıklar</td>
             </tr>
             <tr>
               <td>KLP Sargı</td>
               <td>Sargılama iyileştirmesi</td>
-              <td>Zemin katta kritik kolonlar</td>
+              <td>Zemin katta kritik elemanlar</td>
             </tr>
 
           </tbody>
@@ -524,7 +524,7 @@ html, body {
       <div class="left-bottom">
         <div class="panel-header">
           <span class="panel-icon">📐</span>
-          <span class="panel-title">KLP Sargı Detay Çizimi</span>
+          <span class="panel-title">KLP Sargı Detayı</span>
         </div>
         <div class="img-fill" onclick="openLB('images/b-4-2.PNG')">
           <img src="images/b-4-2.PNG" alt="KLP Sargı Detay Çizimi">
@@ -540,7 +540,7 @@ html, body {
       <div class="mid-top">
         <div class="panel-header">
           <span class="panel-icon">🏗️</span>
-          <span class="panel-title">Çelik Çaprazlı Çerçeve — Render</span>
+          <span class="panel-title">Burkulması Önlenmiş Çelik Çaprazlı Çerçeve Detayı</span>
         </div>
         <div class="toggle-bar" id="render-toggle-bar">
           <button class="toggle-btn active" onclick="setRender(1)">Görsel 1</button>
@@ -558,7 +558,7 @@ html, body {
       <div class="mid-mid">
         <div class="panel-header">
           <span class="panel-icon">🔩</span>
-          <span class="panel-title">Yapısal Detaylar</span>
+          <span class="panel-title">Çerçeve Detayları</span>
         </div>
         <div class="toggle-bar">
           <button class="toggle-btn active" id="btn-detay1" onclick="setDetay(1)">Detay 1–2</button>
@@ -611,7 +611,7 @@ html, body {
             </tbody>
           </table>
           <div class="malz-desc">
-            <strong>Kapasite Tasarımı Yaklaşımı:</strong> Çapraz elemanlar plastik şekil değiştirmeleri önceden üstlenecek şekilde tasarlanmış; çerçeve elemanları ve birleşim bölgeleri elastik bölgede kalacak şekilde boyutlandırılmıştır. SAP2000'de Link/Gap elemanlar ile çelik-beton arayüzündeki tek yönlü yük aktarımı (basınçta rijit, çekmede serbest) modellenmiştir.
+            <strong>Kapasite Tasarımı Yaklaşımı:</strong> Burkulması Önlenmiş Çapraz elemanlar plastik şekil değiştirme yaptığı anda çerçeve elemanları ve birleşim bölgeleri elastik bölgede kalacak şekilde boyutlandırılmıştır.
           </div>
         </div>
 
@@ -633,7 +633,7 @@ html, body {
       <div class="right-top">
         <div class="panel-header">
           <span class="panel-icon">⚙️</span>
-          <span class="panel-title">IDEA Statica — Birleşim Analizleri</span>
+          <span class="panel-title">IDEA Statica — Birleşim SEM Analizleri</span>
         </div>
         <div class="idea-toggle-bar">
           <button class="toggle-btn active" onclick="setIdea(1)">Bir. 1</button>
@@ -651,13 +651,13 @@ html, body {
       <div class="right-mid">
         <div class="panel-header">
           <span class="panel-icon">💻</span>
-          <span class="panel-title">SAP2000 Güçlendirilmiş Model</span>
+          <span class="panel-title">Burkulması Önlenmiş Çaprazlı Çerçeve Modeli</span>
         </div>
         <div class="toggle-bar">
-          <button class="toggle-btn active" id="btn-static"  onclick="setSapMode('static')">📷 Statik</button>
-          <button class="toggle-btn"        id="btn-model"   onclick="setSapMode('model')">🔲 Model Yaklaşımı</button>
-          <button class="toggle-btn"        id="btn-kapasite" onclick="setSapMode('kapasite')">📊 Kapasite Kontrolü</button>
-          <button class="toggle-btn"        id="btn-anim"    onclick="setSapMode('anim')">▶ Animasyon</button>
+          <button class="toggle-btn active" id="btn-static"  onclick="setSapMode('static')">Model</button>
+          <button class="toggle-btn"        id="btn-model"   onclick="setSapMode('model')">Gap/Link Modeli</button>
+          <button class="toggle-btn"        id="btn-kapasite" onclick="setSapMode('kapasite')">Kapasite Kontrolü</button>
+          <button class="toggle-btn"        id="btn-anim"    onclick="setSapMode('anim')">Animasyon</button>
         </div>
         <div class="img-fill" onclick="openLBId('sap-main-img')">
           <img id="sap-main-img" src="images/b-4-6.png" alt="SAP2000 Model">
@@ -671,10 +671,11 @@ html, body {
           <span class="panel-title">Değerlendirme</span>
         </div>
         <div class="eval-text">
-          Çelik çaprazlı çerçeve sistemi, yapının yanal rijitliğini ve dayanımını önemli ölçüde
-          artırmıştır. KLP sargı uygulaması ile kritik kolonların kesme kapasitesi ve sünekliği
-          iyileştirilmiştir. Birleşim bölgeleri IDEA Statica ile analiz edilmiş, tüm bağlantı
+          Burkulması önlenmiş çelik çaprazlı çerçeve sistemi, kat yanal rijitliğini ve dayanımını yeterli ölçüde
+          artırmaktadır.Birleşim bölgeleri IDEA Statica ile analiz edilmiş, tüm bağlantı
           detayları tasarım kapasiteleri dahilinde kalmıştır.
+          KLP sargı uygulaması ile kritik kolonların kesme kapasitesi ve sünekliği
+          iyileştirilmiştir. 
         </div>
       </div>
 

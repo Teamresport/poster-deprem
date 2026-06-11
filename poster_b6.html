@@ -287,18 +287,28 @@ html, body { width:100vw; height:100vh; overflow:hidden; background:#1a0e00; fon
         </table>
       </div>
 
-      <!-- Öneriler -->
+      <!-- Sonuçlar -->
       <div class="right-panel oneri-panel">
         <div class="panel-header" style="background:var(--gold-dark);">
-          <span class="panel-icon">📌</span>
-          <span class="panel-title">Uygulama Önerileri</span>
+          <span class="panel-icon">✅</span>
+          <span class="panel-title">Sonuçlar ve Değerlendirme</span>
         </div>
-        <div class="toggle-bar" style="background:var(--gold-light);">
-          <button class="toggle-btn active" id="btn-o1" onclick="setOneri(1)">🔧 Uygulama</button>
-          <button class="toggle-btn"        id="btn-o2" onclick="setOneri(2)">🔍 Kalite</button>
-          <button class="toggle-btn"        id="btn-o3" onclick="setOneri(3)">🛡 İzleme</button>
+        <div class="oneri-body">
+          <div class="oneri-sec-title">Mevcut Yapı</div>
+          <div class="oneri-item"><span class="oneri-icon">⚠️</span><span class="oneri-text">DD-2 deprem düzeyi için <strong>Kontrollü Hasar (KH)</strong> performans hedefi sağlanamamaktadır.</span></div>
+          <div class="oneri-item"><span class="oneri-icon">🔴</span><span class="oneri-text">Göçme Öncesi (GÖ) sınırını aşan elemanlar tespit edilmiştir.</span></div>
+          <div class="oneri-item"><span class="oneri-icon">📐</span><span class="oneri-text">Yerinde incelemede yapısal hasara rastlanmamış, bina performans değerlendirmesine uygundur.</span></div>
+
+          <div class="oneri-sec-title" style="margin-top:.3vh;">Güçlendirme Tasarımı</div>
+          <div class="oneri-item"><span class="oneri-icon">🔩</span><span class="oneri-text">Bodrum ve zemin katlara <strong>BRB çelik çapraz</strong> elemanlar eklenerek yanal rijitlik ve dayanım artırılmıştır.</span></div>
+          <div class="oneri-item"><span class="oneri-icon">🧵</span><span class="oneri-text">Zemin kattaki kritik kolonlara <strong>KLP sargılama</strong> uygulanarak süneklik kapasitesi geliştirilmiştir.</span></div>
+
+          <div class="oneri-sec-title" style="margin-top:.3vh;">Güçlendirilmiş Yapı</div>
+          <div class="oneri-item"><span class="oneri-icon">✅</span><span class="oneri-text">X ve Y doğrultularında yeterli yanal dayanım ve şekildeğiştirme kapasitesi sağlanmıştır.</span></div>
+          <div class="oneri-item"><span class="oneri-icon">✅</span><span class="oneri-text">Tüm kolon ve kirişler KH sınırları içinde kalmış; GÖ sınırını aşan eleman bulunmamaktadır.</span></div>
+          <div class="oneri-item"><span class="oneri-icon">✅</span><span class="oneri-text">BRB elemanlar tasarım kapasitesi dahilinde kalmış, burkulma veya kapasite kaybı gözlemlenmemiştir.</span></div>
+          <div class="oneri-item"><span class="oneri-icon">🏆</span><span class="oneri-text"><strong>Güçlendirilmiş yapı DD-2 için Kontrollü Hasar (KH) performans hedefini sağlamaktadır.</strong></span></div>
         </div>
-        <div class="oneri-body" id="oneri-body"></div>
       </div>
 
     </div><!-- /right-col -->
@@ -436,47 +446,9 @@ function setHasar(type) {
   rebuildHasar();
 }
 
-/* ÖNERİLER */
-var oneriData = {
-  1: { baslik:'Uygulama Aşaması', maddeler:[
-    {icon:'🏗', text:'Güçlendirme uygulaması onaylı uygulama projelerine uygun gerçekleştirilmelidir.'},
-    {icon:'🔩', text:'Çelik imalat ve montaj işleri TSE belgeli firmalar tarafından yapılmalıdır.'},
-    {icon:'🧵', text:'KLP uygulaması üretici firma teknik şartnamesine uygun gerçekleştirilmelidir.'},
-    {icon:'⛏',  text:'Ankraj delikleri mevcut donatıya zarar vermeyecek şekilde açılmalıdır.'},
-    {icon:'🧱', text:'Beton onarım işlemleri standartlara uygun malzemelerle yapılmalıdır.'}
-  ]},
-  2: { baslik:'Kalite Kontrol', maddeler:[
-    {icon:'🔧', text:'Cıvata bağlantılarının sıkma torkları kontrol edilmelidir.'},
-    {icon:'🧪', text:'KLP uygulaması sonrası yapışma testleri (pull-off) yapılmalıdır.'},
-    {icon:'⚓', text:'Ankraj kapasiteleri yerinde çekme testleri ile doğrulanmalıdır.'},
-    {icon:'📸', text:'İmalat ve montaj aşamalarında fotoğraflı belgelendirme yapılmalıdır.'},
-    {icon:'👷', text:'Tüm aşamalarda yetkin teknik personel gözetimi sağlanmalıdır.'}
-  ]},
-  3: { baslik:'Bakım ve İzleme', maddeler:[
-    {icon:'🔁', text:'Güçlendirme sonrası periyodik yapısal kontroller yapılmalıdır.'},
-    {icon:'🌍', text:'Olası depremler sonrası yapısal elemanlarda hasar kontrolü gerçekleştirilmelidir.'},
-    {icon:'☀️', text:'KLP yüzeylerinin UV ve çevresel etkilerden korunması sağlanmalıdır.'},
-    {icon:'🔴', text:'Çelik elemanların korozyon koruması düzenli olarak kontrol edilmelidir.'},
-    {icon:'🗃', text:'Uygulama sonrası as-built çizimler arşivlenmelidir.'}
-  ]}
-};
-
-function setOneri(n) {
-  [1,2,3].forEach(function(i){
-    document.getElementById('btn-o'+i).classList.toggle('active', i===n);
-  });
-  var d = oneriData[n];
-  var html = '<div class="oneri-sec-title">' + d.baslik + '</div>';
-  d.maddeler.forEach(function(m){
-    html += '<div class="oneri-item"><span class="oneri-icon">' + m.icon + '</span><span class="oneri-text">' + m.text + '</span></div>';
-  });
-  document.getElementById('oneri-body').innerHTML = html;
-}
-
 /* BAŞLANGIÇ */
 rebuildPush();
 rebuildHasar();
-setOneri(1);
 </script>
 
 </body>

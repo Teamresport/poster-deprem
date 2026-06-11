@@ -200,6 +200,9 @@ html, body {
   width: 100%;
   border-collapse: collapse;
   font-size: .72vh;
+  max-height: 30%;
+  overflow: hidden;
+  display: block;
 }
 .guc-table th {
   background: var(--teal-dark);
@@ -221,7 +224,7 @@ html, body {
 
 /* Fotoğraf alanı */
 .photo-area {
-  flex: 1; min-height: 0;
+  flex: 1; min-height: 8vh;
   display: flex; align-items: center; justify-content: center;
   padding: .35vh .5vw;
   overflow: hidden;

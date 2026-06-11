@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Bölüm 04 — Güçlendirme Stratejileri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal-dark:   #003c3c;
+  --teal-main:   #005e5e;
+  --teal-mid:    #007878;
+  --teal-bright: #28a0a0;
+  --teal-light:  #e8f6f4;
+  --teal-xlight: #f0faf8;
+  --text-dark:   #0a2a2a;
+  --text-mid:    #1a4a4a;
+  --text-soft:   #3a7a7a;
+  --border:      #b0dbd8;
+  --font: 'Inter', Arial, sans-serif;
+}
+
+html, body {
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  background: #001818;
+  font-family: var(--font);
+  touch-action: none;
+}
+
+.poster {
+  position: fixed;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ── BUTONLAR ── */
+.fs-btn {
+  position: fixed; bottom: 1.5vh; right: 1.5vh; z-index: 9999;
+  background: var(--teal-main); color: #fff;
+  border: none; cursor: pointer; border-radius: 50%;
+  width: 6vh; height: 6vh; font-size: 2.5vh;
+  box-shadow: 0 0.4vh 1.6vh rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s; outline: none;
+}
+.fs-btn:hover { background: var(--teal-bright); }
+
+.back-btn {
+  position: fixed; bottom: 1.5vh; left: 1.5vh; z-index: 9999;
+  background: var(--teal-dark); color: #fff;
+  border: none; cursor: pointer; border-radius: 3vh;
+  padding: 0 2vw; height: 6vh; font-size: 1.6vh; font-weight: 600;
+  display: flex; align-items: center; gap: 0.8vh;
+  text-decoration: none; font-family: var(--font);
+  box-shadow: 0 0.4vh 1.6vh rgba(0,0,0,0.45);
+  transition: background .2s;
+}
+.back-btn:hover { background: var(--teal-main); }
+
+/* ── HEADER ── */
+.header {
+  background: linear-gradient(135deg, var(--teal-main) 0%, var(--teal-bright) 100%);
+  display: flex; align-items: center; gap: 2vw;
+  padding: 1.2vh 3vw;
+  border-bottom: 0.5vh solid var(--teal-dark);
+  flex-shrink: 0; width: 100%;
+}
+.header-logo {
+  width: 10vh; height: 10vh; border-radius: 50%;
+  background: rgba(255,255,255,0.15); padding: 0.4vh;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  border: 0.3vh solid rgba(255,255,255,0.30);
+}
+.header-logo img { width: 9.2vh; height: 9.2vh; border-radius: 50%; object-fit: cover; display: block; }
+.header-center { flex: 1; text-align: center; min-width: 0; }
+.header-inst  { font-size: 2.2vh; font-weight: 800; color: rgba(255,255,255,.96); letter-spacing:.08vw; text-transform:uppercase; margin-bottom:.4vh; }
+.header-dept  { font-size: 1.7vh; font-weight: 500; color: rgba(255,255,255,.82); margin-bottom:.5vh; }
+.header-type  { display:inline-block; font-size:1.3vh; font-weight:700; letter-spacing:.18vw; text-transform:uppercase; color:var(--teal-dark); background:rgba(255,255,255,.90); padding:.4vh 1.5vw; border-radius:3vh; }
+.header-spacer { width: 10vh; flex-shrink:0; }
+
+/* ── BÖLÜM BAŞLIĞI ── */
+.section-header {
+  background: var(--teal-dark);
+  display: flex; align-items: center; gap: 1.5vw;
+  padding: 1.2vh 3vw;
+  flex-shrink: 0; width: 100%;
+}
+.sec-badge      { font-size: 1vh; font-weight: 700; letter-spacing: .15vw; text-transform: uppercase; color: var(--teal-bright); background: rgba(255,255,255,.1); padding: .3vh 1vw; border-radius: 2vh; border: .1vh solid rgba(40,160,160,.4); flex-shrink: 0; }
+.sec-title-main { font-size: 2.4vh; font-weight: 800; color: #fff; flex: 1; }
+.sec-subtitle   { font-size: 1.2vh; color: rgba(255,255,255,.65); flex-shrink: 0; }
+
+/* ── CONTENT GRID: 3 sütun ── */
+.content {
+  flex: 1; min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  gap: 0;
+  padding: .7vh .9vw .5vh;
+  background: var(--teal-xlight);
+  width: 100%;
+}
+
+/* Toggle butonları */
+.toggle-bar {
+  display: flex; gap: .35vw;
+  padding: .35vh .45vw .3vh;
+  background: var(--teal-xlight);
+  border-bottom: .1vh solid var(--border);
+  flex-shrink: 0;
+}
+.toggle-btn {
+  flex: 1; padding: .3vh 0; border-radius: .5vh;
+  border: .15vh solid var(--border);
+  background: #fff; color: var(--text-mid);
+  font-size: .78vh; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+  font-family: var(--font);
+  white-space: nowrap;
+}
+.toggle-btn.active {
+  background: var(--teal-main); color: #fff;
+  border-color: var(--teal-dark);
+}
+.toggle-btn:hover:not(.active) { background: var(--teal-light); }
+
+/* ── IMG helpers ── */
+.img-fill {
+  flex: 1; min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: .35vh .4vw;
+  overflow: hidden;
+}
+.img-fill img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain; display: block;
+  cursor: zoom-in; border-radius: .4vh;
+  transition: transform .15s;
+}
+.img-fill img:hover { transform: scale(1.02); }
+
+/* ══════════════════════════════════
+   SOL KOLON
+══════════════════════════════════ */
+.left-col {
+  grid-column: 1;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.left-top {
+  flex: 0 0 55%;
+  min-height: 0;
+  margin: .35vh .35vh .2vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.left-top .panel-header { background: var(--teal-dark); padding: .45vh .9vw; }
+
+.left-bottom {
+  flex: 1;
+  min-height: 0;
+  margin: .2vh .35vh .35vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.left-bottom .panel-header { background: var(--teal-mid); padding: .45vh .9vw; }
+
+.panel-header {
+  padding: .5vh .9vw;
+  display: flex; align-items: center; gap: .5vw;
+  flex-shrink: 0;
+}
+.panel-icon  { font-size: 1.3vh; }
+.panel-title { font-size: 1vh; font-weight: 700; color: #fff; letter-spacing: .03vw; text-transform: uppercase; }
+
+/* Strateji metin */
+.strat-text {
+  flex: 0 0 auto;
+  font-size: .78vh;
+  color: var(--text-mid);
+  line-height: 1.5;
+  padding: .5vh .7vw .3vh;
+}
+
+/* Güçlendirme tablosu */
+.guc-table {
+  flex: 0 0 auto;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .72vh;
+}
+.guc-table th {
+  background: var(--teal-dark);
+  color: #fff;
+  font-weight: 700;
+  padding: .35vh .4vw;
+  text-align: left;
+  border: .1vh solid var(--teal-mid);
+}
+.guc-table td {
+  padding: .32vh .4vw;
+  border: .1vh solid var(--border);
+  color: var(--text-dark);
+  line-height: 1.35;
+  vertical-align: top;
+}
+.guc-table tr:nth-child(even) td { background: var(--teal-xlight); }
+.guc-table tr:nth-child(odd)  td { background: #fff; }
+
+/* Fotoğraf alanı */
+.photo-area {
+  flex: 1; min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: .35vh .5vw;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.photo-area img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain; display: block;
+  border-radius: .4vh;
+  transition: transform .15s;
+}
+.photo-area img:hover { transform: scale(1.02); }
+
+/* ══════════════════════════════════
+   ORTA KOLON
+══════════════════════════════════ */
+.mid-col {
+  grid-column: 2;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.mid-top {
+  flex: 0 0 42%;
+  min-height: 0;
+  margin: .35vh .35vh .2vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.mid-top .panel-header { background: var(--teal-dark); padding: .45vh .9vw; }
+
+.mid-mid {
+  flex: 0 0 28%;
+  min-height: 0;
+  margin: .2vh .35vh .2vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.mid-mid .panel-header { background: var(--teal-mid); padding: .45vh .9vw; }
+
+.mid-bottom {
+  flex: 1;
+  min-height: 0;
+  margin: .2vh .35vh .35vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.mid-bottom .panel-header { background: var(--teal-dark); padding: .45vh .9vw; }
+
+/* 2 görsel yan yana grid */
+.dual-img-grid {
+  flex: 1; min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .3vw;
+  padding: .35vh .4vw;
+  overflow: hidden;
+}
+.dual-img-cell {
+  display: flex; flex-direction: column;
+  align-items: center;
+  cursor: zoom-in;
+  transition: transform .15s;
+  overflow: hidden;
+  border-radius: .4vh;
+  border: .1vh solid var(--border);
+}
+.dual-img-cell:hover { transform: scale(1.02); border-color: var(--teal-main); }
+.dual-img-cell img {
+  flex: 1; min-height: 0;
+  width: 100%; object-fit: contain; display: block;
+}
+.dual-img-label {
+  font-size: .68vh; font-weight: 600;
+  color: var(--teal-dark);
+  padding: .18vh .3vw;
+  background: var(--teal-xlight);
+  width: 100%; text-align: center;
+  flex-shrink: 0;
+  border-top: .1vh solid var(--border);
+}
+
+/* Malzeme tablosu */
+.malz-body {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  padding: .4vh .5vw;
+  gap: .3vh;
+  overflow: hidden;
+}
+.malz-table {
+  flex: 0 0 auto;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .7vh;
+}
+.malz-table th {
+  background: var(--teal-dark);
+  color: #fff;
+  font-weight: 700;
+  padding: .3vh .4vw;
+  text-align: left;
+  border: .1vh solid var(--teal-mid);
+}
+.malz-table td {
+  padding: .28vh .4vw;
+  border: .1vh solid var(--border);
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+.malz-table tr:nth-child(even) td { background: var(--teal-xlight); }
+.malz-table tr:nth-child(odd)  td { background: #fff; }
+.malz-table td:first-child { color: var(--text-mid); font-weight: 600; }
+.malz-table td:last-child { font-weight: 700; color: var(--teal-dark); }
+
+.malz-desc {
+  flex: 1; min-height: 0;
+  font-size: .7vh;
+  color: var(--text-mid);
+  line-height: 1.5;
+  background: var(--teal-xlight);
+  border: .1vh solid var(--border);
+  border-radius: .4vh;
+  padding: .4vh .5vw;
+  overflow: hidden;
+}
+.malz-desc strong { color: var(--teal-dark); }
+
+/* ══════════════════════════════════
+   SAĞ KOLON
+══════════════════════════════════ */
+.right-col {
+  grid-column: 3;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* IDEA Statica — üst (39%) */
+.right-top {
+  flex: 0 0 39%;
+  min-height: 0;
+  margin: .35vh .35vh .2vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.right-top .panel-header { background: var(--teal-dark); padding: .45vh .9vw; }
+
+/* SAP2000 — orta (flex:1, kalan tüm alan) */
+.right-mid {
+  flex: 1;
+  min-height: 0;
+  margin: .2vh .35vh .2vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.right-mid .panel-header { background: var(--teal-mid); padding: .45vh .9vw; }
+
+/* Değerlendirme — alt (22%) */
+.right-bottom {
+  flex: 0 0 22%;
+  min-height: 0;
+  margin: .2vh .35vh .35vh .35vh;
+  background: #fff;
+  border: .15vh solid var(--border);
+  border-radius: 1vh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.right-bottom .panel-header { background: var(--teal-bright); padding: .45vh .9vw; }
+
+/* Değerlendirme metni */
+.eval-text {
+  flex: 1; min-height: 0;
+  font-size: .72vh;
+  color: var(--text-mid);
+  line-height: 1.5;
+  padding: .45vh .55vw;
+  overflow: hidden;
+}
+
+/* IDEA toggle butonları — 6 adet */
+.idea-toggle-bar {
+  display: flex; gap: .28vw;
+  padding: .32vh .4vw .28vh;
+  background: var(--teal-xlight);
+  border-bottom: .1vh solid var(--border);
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+.idea-toggle-bar .toggle-btn {
+  font-size: .68vh;
+  padding: .28vh 0;
+}
+
+/* ── FOOTER ── */
+.poster-footer {
+  background: var(--teal-dark);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .65vh 3vw;
+  flex-shrink: 0; width: 100%;
+}
+.footer-left { font-size: 1.05vh; color: rgba(255,255,255,.75); }
+.nav-dots { display: flex; gap: .6vw; align-items: center; }
+.nav-dot {
+  width: 1.4vh; height: 1.4vh; border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  display: inline-block; transition: background .2s;
+  text-decoration: none;
+}
+.nav-dot:hover  { background: rgba(255,255,255,.65); }
+.nav-dot.active { background: #fff; }
+</style>
+</head>
+<body>
+
+<div class="poster" id="poster">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-logo">
+      <img src="images/logo.png" alt="BAÜ Logo">
+    </div>
+    <div class="header-center">
+      <div class="header-inst">Balıkesir Üniversitesi</div>
+      <div class="header-dept">Mühendislik Fakültesi — İnşaat Mühendisliği Bölümü</div>
+      <span class="header-type">Lisans Bitirme Çalışması</span>
+    </div>
+    <div class="header-spacer"></div>
+  </div>
+
+  <!-- BÖLÜM BAŞLIĞI -->
+  <div class="section-header">
+    <span class="sec-badge">Bölüm 04 / 06</span>
+    <span class="sec-title-main">Güçlendirme Stratejileri</span>
+    <span class="sec-subtitle">Çelik Çaprazlı Çerçeve · KLP Sargı · Birleşim Detayları</span>
+  </div>
+
+  <!-- İÇERİK -->
+  <div class="content">
+
+    <!-- ══════════ SOL KOLON ══════════ -->
+    <div class="left-col">
+
+      <!-- Üst Panel: Güçlendirme Stratejisi -->
+      <div class="left-top">
+        <div class="panel-header">
+          <span class="panel-icon">🔧</span>
+          <span class="panel-title">Güçlendirme Stratejisi</span>
+        </div>
+
+        <div class="strat-text">
+          Mevcut yapının DD-2 deprem düzeyi için KH performans hedefini sağlayamaması nedeniyle
+          güçlendirme tasarımı yapılmıştır. Hedef: yanal rijitlik artırımı, kritik kolonların kesme
+          kapasitesinin ve sargılama detaylarının iyileştirilmesi. Minimum müdahale ile maksimum
+          performans iyileştirmesi yaklaşımı benimsenmiştir.
+        </div>
+
+        <table class="guc-table">
+          <thead>
+            <tr>
+              <th>Yöntem</th>
+              <th>Amaç</th>
+              <th>Uygulama Bölgesi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Çelik Çaprazlı Çerçeve</td>
+              <td>Yanal rijitlik ve dayanım artırımı</td>
+              <td>Bodrum ve zemin katta seçilen açıklıklar</td>
+            </tr>
+            <tr>
+              <td>KLP Sargı</td>
+              <td>Sargılama iyileştirmesi</td>
+              <td>Zemin katta kritik kolonlar</td>
+            </tr>
+            <tr>
+              <td>Çelik Çerçeve Elemanları</td>
+              <td>Basınca çalışan çelik çapraz-beton bağlantısı</td>
+              <td>Çelik çaprazların yerleştirileceği açıklıklar</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="photo-area" onclick="openLB('images/b-4-1.PNG')">
+          <img src="images/b-4-1.PNG" alt="Güçlendirme Stratejisi Görseli">
+        </div>
+      </div>
+
+      <!-- Alt Panel: KLP Sargı Detay Çizimi -->
+      <div class="left-bottom">
+        <div class="panel-header">
+          <span class="panel-icon">📐</span>
+          <span class="panel-title">KLP Sargı Detay Çizimi</span>
+        </div>
+        <div class="img-fill" onclick="openLB('images/b-4-2.PNG')">
+          <img src="images/b-4-2.PNG" alt="KLP Sargı Detay Çizimi">
+        </div>
+      </div>
+
+    </div><!-- /left-col -->
+
+    <!-- ══════════ ORTA KOLON ══════════ -->
+    <div class="mid-col">
+
+      <!-- Üst Panel: Çelik Çaprazlı Çerçeve Render -->
+      <div class="mid-top">
+        <div class="panel-header">
+          <span class="panel-icon">🏗️</span>
+          <span class="panel-title">Çelik Çaprazlı Çerçeve — Render</span>
+        </div>
+        <div class="toggle-bar" id="render-toggle-bar">
+          <button class="toggle-btn active" onclick="setRender(1)">Görsel 1</button>
+          <button class="toggle-btn"        onclick="setRender(2)">Görsel 2</button>
+          <button class="toggle-btn"        onclick="setRender(3)">Görsel 3</button>
+          <button class="toggle-btn"        onclick="setRender(4)">Görsel 4</button>
+          <button class="toggle-btn"        onclick="setRender(5)">Görsel 5</button>
+        </div>
+        <div class="img-fill" onclick="openLBId('render-main-img')">
+          <img id="render-main-img" src="images/b-4-3.PNG" alt="Render Görsel 1">
+        </div>
+      </div>
+
+      <!-- Orta Panel: Yapısal Detaylar -->
+      <div class="mid-mid">
+        <div class="panel-header">
+          <span class="panel-icon">🔩</span>
+          <span class="panel-title">Yapısal Detaylar</span>
+        </div>
+        <div class="toggle-bar">
+          <button class="toggle-btn active" id="btn-detay1" onclick="setDetay(1)">Detay 1–2</button>
+          <button class="toggle-btn"        id="btn-detay2" onclick="setDetay(2)">Detay 3–4</button>
+        </div>
+        <div class="dual-img-grid" id="detay-grid-1">
+          <div class="dual-img-cell" onclick="openLB('images/b-4-4.PNG')">
+            <img src="images/b-4-4.PNG" alt="Detay 1">
+            <div class="dual-img-label">Detay 1</div>
+          </div>
+          <div class="dual-img-cell" onclick="openLB('images/b-4-5.PNG')">
+            <img src="images/b-4-5.PNG" alt="Detay 2">
+            <div class="dual-img-label">Detay 2</div>
+          </div>
+        </div>
+        <div class="dual-img-grid" id="detay-grid-2" style="display:none;">
+          <div class="dual-img-cell" onclick="openLB('images/b-4-18.PNG')">
+            <img src="images/b-4-18.PNG" alt="Detay 3">
+            <div class="dual-img-label">Detay 3</div>
+          </div>
+          <div class="dual-img-cell" onclick="openLB('images/b-4-19.PNG')">
+            <img src="images/b-4-19.PNG" alt="Detay 4">
+            <div class="dual-img-label">Detay 4</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alt Panel: Malzeme Özellikleri ve Davranışı -->
+      <div class="mid-bottom">
+        <div class="panel-header">
+          <span class="panel-icon">🧪</span>
+          <span class="panel-title">Malzeme Özellikleri ve Davranış Modeli</span>
+        </div>
+        <div class="toggle-bar">
+          <button class="toggle-btn active" id="btn-celik"  onclick="setMalz('celik')">⚙️ Yapısal Çelik</button>
+          <button class="toggle-btn"        id="btn-eksenel" onclick="setMalz('eksenel')">📈 Eksenel Kuvvet İlişkisi</button>
+        </div>
+
+        <!-- YAPISAL ÇELİK -->
+        <div class="malz-body" id="malz-celik">
+          <table class="malz-table">
+            <thead><tr><th>Parametre</th><th>Değer</th></tr></thead>
+            <tbody>
+              <tr><td>Çelik Sınıfı (Çerçeve)</td><td>S235 — f<sub>y</sub> = 235 MPa</td></tr>
+              <tr><td>Çelik Sınıfı (Çapraz)</td><td>S355 — f<sub>y</sub> = 355 MPa</td></tr>
+              <tr><td>Elastisite Modülü (E)</td><td>210 000 MPa</td></tr>
+              <tr><td>Çapraz Profil</td><td>2L100×20 sırt sırta çift köşebent</td></tr>
+              <tr><td>Bağlantı</td><td>Kimyasal ankraj + grout dolgu</td></tr>
+              <tr><td>Tasarım Yaklaşımı</td><td>Kapasite tasarımı (TBDY 2018 §9.2.6)</td></tr>
+            </tbody>
+          </table>
+          <div class="malz-desc">
+            <strong>Kapasite Tasarımı Yaklaşımı:</strong> Çapraz elemanlar plastik şekil değiştirmeleri önceden üstlenecek şekilde tasarlanmış; çerçeve elemanları ve birleşim bölgeleri elastik bölgede kalacak şekilde boyutlandırılmıştır. SAP2000'de Link/Gap elemanlar ile çelik-beton arayüzündeki tek yönlü yük aktarımı (basınçta rijit, çekmede serbest) modellenmiştir.
+          </div>
+        </div>
+
+        <!-- EKSENEL KUVVET İLİŞKİSİ -->
+        <div class="malz-body" id="malz-eksenel" style="display:none;">
+          <div class="img-fill" style="padding:0;" onclick="openLB('images/b-4-13.PNG')">
+            <img src="images/b-4-13.PNG" alt="Eksenel Kuvvet Uzama İlişkisi">
+          </div>
+        </div>
+
+      </div><!-- /mid-bottom -->
+
+    </div><!-- /mid-col -->
+
+    <!-- ══════════ SAĞ KOLON ══════════ -->
+    <div class="right-col">
+
+      <!-- Üst Panel: IDEA Statica Birleşim Analizleri (~50%) -->
+      <div class="right-top">
+        <div class="panel-header">
+          <span class="panel-icon">⚙️</span>
+          <span class="panel-title">IDEA Statica — Birleşim Analizleri</span>
+        </div>
+        <div class="idea-toggle-bar">
+          <button class="toggle-btn active" onclick="setIdea(1)">Bir. 1</button>
+          <button class="toggle-btn"        onclick="setIdea(2)">Bir. 2</button>
+          <button class="toggle-btn"        onclick="setIdea(3)">Bir. 3</button>
+          <button class="toggle-btn"        onclick="setIdea(4)">Bir. 4</button>
+          <button class="toggle-btn"        onclick="setIdea(5)">Bir. 5</button>
+        </div>
+        <div class="img-fill" onclick="openLBId('idea-main-img')">
+          <img id="idea-main-img" src="images/b-4-7.PNG" alt="Birleşim 1">
+        </div>
+      </div>
+
+      <!-- Orta Panel: SAP2000 Yapısal Model (flex:1) -->
+      <div class="right-mid">
+        <div class="panel-header">
+          <span class="panel-icon">💻</span>
+          <span class="panel-title">SAP2000 Güçlendirilmiş Model</span>
+        </div>
+        <div class="toggle-bar">
+          <button class="toggle-btn active" id="btn-static"  onclick="setSapMode('static')">📷 Statik</button>
+          <button class="toggle-btn"        id="btn-model"   onclick="setSapMode('model')">🔲 Model Yaklaşımı</button>
+          <button class="toggle-btn"        id="btn-kapasite" onclick="setSapMode('kapasite')">📊 Kapasite Kontrolü</button>
+          <button class="toggle-btn"        id="btn-anim"    onclick="setSapMode('anim')">▶ Animasyon</button>
+        </div>
+        <div class="img-fill" onclick="openLBId('sap-main-img')">
+          <img id="sap-main-img" src="images/b-4-6.PNG" alt="SAP2000 Model">
+        </div>
+      </div>
+
+      <!-- Alt Panel: Değerlendirme (22%) -->
+      <div class="right-bottom">
+        <div class="panel-header">
+          <span class="panel-icon">📝</span>
+          <span class="panel-title">Değerlendirme</span>
+        </div>
+        <div class="eval-text">
+          Çelik çaprazlı çerçeve sistemi, yapının yanal rijitliğini ve dayanımını önemli ölçüde
+          artırmıştır. KLP sargı uygulaması ile kritik kolonların kesme kapasitesi ve sünekliği
+          iyileştirilmiştir. Birleşim bölgeleri IDEA Statica ile analiz edilmiş, tüm bağlantı
+          detayları tasarım kapasiteleri dahilinde kalmıştır.
+        </div>
+      </div>
+
+    </div><!-- /right-col -->
+
+  </div><!-- /content -->
+
+  <!-- FOOTER -->
+  <div class="poster-footer">
+    <div class="footer-left">
+      <strong>Serhat Kayar</strong> &nbsp;·&nbsp; Danışman: Dr. Öğr. Üyesi Erkan Töre &nbsp;·&nbsp; Balıkesir Üniversitesi &nbsp;·&nbsp; 10 Haziran 2026
+    </div>
+    <div class="nav-dots">
+      <a class="nav-dot" href="poster_anasayfa.html" title="Ana Sayfa"></a>
+      <a class="nav-dot" href="poster_b1.html"       title="B1 Giriş"></a>
+      <a class="nav-dot" href="poster_b2.html"       title="B2 Model"></a>
+      <a class="nav-dot" href="poster_b3.html"       title="B3 Önce"></a>
+      <a class="nav-dot active" href="poster_b4.html" title="B4 Güçlendirme"></a>
+      <a class="nav-dot" href="poster_b5.html"       title="B5 Sonra"></a>
+      <a class="nav-dot" href="poster_b6.html"       title="B6 Sonuç"></a>
+    </div>
+  </div>
+
+</div><!-- /poster -->
+
+<!-- LİGHTBOX -->
+<div id="lb" onclick="closeLB()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out;">
+  <img id="lb-img" style="max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 0 4vh rgba(0,0,0,.8);">
+</div>
+
+<button class="fs-btn" onclick="toggleFS()" title="Tam Ekran">⛶</button>
+<a class="back-btn" href="poster_anasayfa.html">← Ana Sayfa</a>
+
+<script>
+/* ── FİT ── */
+function fitPoster() {
+  var vw = document.fullscreenElement ? screen.width  : window.innerWidth;
+  var vh = document.fullscreenElement ? screen.height : window.innerHeight;
+  var size = Math.min(vw, vh);
+  var p = document.getElementById('poster');
+  p.style.width  = size + 'px';
+  p.style.height = size + 'px';
+  p.style.left   = ((vw - size) / 2) + 'px';
+  p.style.top    = ((vh - size) / 2) + 'px';
+}
+fitPoster();
+window.addEventListener('resize', fitPoster);
+if (window.visualViewport) window.visualViewport.addEventListener('resize', fitPoster);
+function toggleFS() {
+  if (!document.fullscreenElement)
+    document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(function(){});
+  else document.exitFullscreen();
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'F11') { e.preventDefault(); toggleFS(); } });
+document.addEventListener('fullscreenchange', function() { setTimeout(fitPoster, 80); });
+
+/* ── LİGHTBOX ── */
+function openLB(src) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb').style.display = 'flex';
+}
+function openLBId(imgId) {
+  openLB(document.getElementById(imgId).src);
+}
+function closeLB() { document.getElementById('lb').style.display = 'none'; }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLB(); });
+
+/* ── DETAY TOGGLE ── */
+function setDetay(n) {
+  document.getElementById('detay-grid-1').style.display = (n === 1) ? 'grid' : 'none';
+  document.getElementById('detay-grid-2').style.display = (n === 2) ? 'grid' : 'none';
+  document.getElementById('btn-detay1').classList.toggle('active', n === 1);
+  document.getElementById('btn-detay2').classList.toggle('active', n === 2);
+}
+
+/* ── RENDER TOGGLE ── */
+var RENDER_IMGS = ['images/b-4-3.PNG','images/b-4-14.PNG','images/b-4-15.PNG','images/b-4-16.PNG','images/b-4-17.PNG'];
+function setRender(n) {
+  document.getElementById('render-main-img').src = RENDER_IMGS[n - 1];
+  document.querySelectorAll('#render-toggle-bar .toggle-btn').forEach(function(btn, i) {
+    btn.classList.toggle('active', i + 1 === n);
+  });
+}
+
+/* ── MALZEME TOGGLE ── */
+function setMalz(type) {
+  ['celik','eksenel'].forEach(function(t) {
+    document.getElementById('malz-' + t).style.display = (t === type) ? 'flex' : 'none';
+    document.getElementById('btn-' + t).classList.toggle('active', t === type);
+  });
+}
+
+/* ── SAP2000 TOGGLE ── */
+function setSapMode(mode) {
+  ['static','model','kapasite','anim'].forEach(function(m) {
+    document.getElementById('btn-' + m).classList.toggle('active', m === mode);
+  });
+  var src = { static: 'images/b-4-6.PNG', model: 'images/b-4-20.PNG', kapasite: 'images/b-4-21.PNG', anim: 'gif/b-4-1.gif' };
+  document.getElementById('sap-main-img').src = src[mode];
+}
+
+/* ── IDEA STATICA TOGGLE ── */
+function setIdea(n) {
+  document.getElementById('idea-main-img').src = 'images/b-4-' + (6 + n) + '.PNG';
+  document.querySelectorAll('.idea-toggle-bar .toggle-btn').forEach(function(btn, i) {
+    btn.classList.toggle('active', i + 1 === n);
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Bölüm 06 — Sonuçlar &amp; Öneriler</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold-dark:   #4a3000;
+  --gold-main:   #8a5c00;
+  --gold-mid:    #c07800;
+  --gold-bright: #e89a00;
+  --gold-light:  #fff8e6;
+  --gold-xlight: #fffdf5;
+  --red:         #c0392b;
+  --red-dark:    #7b1a1a;
+  --green:       #1e8449;
+  --green-dark:  #0d4a0d;
+  --text-dark:   #2a1a00;
+  --text-mid:    #4a3200;
+  --border:      #e0c878;
+  --font: 'Inter', Arial, sans-serif;
+}
+
+html, body { width:100vw; height:100vh; overflow:hidden; background:#1a0e00; font-family:var(--font); touch-action:none; }
+.poster { position:fixed; background:#fff; overflow:hidden; display:flex; flex-direction:column; align-items:stretch; }
+
+.fs-btn {
+  position:fixed; bottom:1.5vh; right:1.5vh; z-index:9999;
+  background:var(--gold-main); color:#fff; border:none; cursor:pointer; border-radius:50%;
+  width:6vh; height:6vh; font-size:2.5vh;
+  box-shadow:0 .4vh 1.6vh rgba(0,0,0,.45);
+  display:flex; align-items:center; justify-content:center; transition:background .2s; outline:none;
+}
+.fs-btn:hover { background:var(--gold-bright); }
+.back-btn {
+  position:fixed; bottom:1.5vh; left:1.5vh; z-index:9999;
+  background:var(--gold-dark); color:#fff; border:none; cursor:pointer; border-radius:3vh;
+  padding:0 2vw; height:6vh; font-size:1.6vh; font-weight:600;
+  display:flex; align-items:center; gap:.8vh; text-decoration:none; font-family:var(--font);
+  box-shadow:0 .4vh 1.6vh rgba(0,0,0,.45); transition:background .2s;
+}
+.back-btn:hover { background:var(--gold-main); }
+
+/* HEADER */
+.header {
+  background:linear-gradient(135deg, var(--gold-main) 0%, var(--gold-bright) 100%);
+  display:flex; align-items:center; gap:2vw;
+  padding:1.2vh 3vw; border-bottom:.5vh solid var(--gold-dark); flex-shrink:0; width:100%;
+}
+.header-logo { width:10vh; height:10vh; border-radius:50%; background:rgba(255,255,255,.15); padding:.4vh; flex-shrink:0; display:flex; align-items:center; justify-content:center; border:.3vh solid rgba(255,255,255,.30); }
+.header-logo img { width:9.2vh; height:9.2vh; border-radius:50%; object-fit:cover; display:block; }
+.header-center { flex:1; text-align:center; min-width:0; }
+.header-inst  { font-size:2.2vh; font-weight:800; color:rgba(255,255,255,.96); letter-spacing:.08vw; text-transform:uppercase; margin-bottom:.4vh; }
+.header-dept  { font-size:1.7vh; font-weight:500; color:rgba(255,255,255,.85); margin-bottom:.5vh; }
+.header-type  { display:inline-block; font-size:1.3vh; font-weight:700; letter-spacing:.18vw; text-transform:uppercase; color:var(--gold-dark); background:rgba(255,255,255,.92); padding:.4vh 1.5vw; border-radius:3vh; }
+.header-spacer { width:10vh; flex-shrink:0; }
+
+/* BÖLÜM BAŞLIĞI */
+.section-header { background:var(--gold-dark); display:flex; align-items:center; gap:1.5vw; padding:1.2vh 3vw; flex-shrink:0; width:100%; }
+.sec-badge      { font-size:1vh; font-weight:700; letter-spacing:.15vw; text-transform:uppercase; color:var(--gold-bright); background:rgba(255,255,255,.1); padding:.3vh 1vw; border-radius:2vh; border:.1vh solid rgba(200,150,0,.4); flex-shrink:0; }
+.sec-title-main { font-size:2.4vh; font-weight:800; color:#fff; flex:1; }
+.sec-subtitle   { font-size:1.2vh; color:rgba(255,255,255,.65); flex-shrink:0; }
+
+/* CONTENT — 3 sütun */
+.content {
+  flex:1; min-height:0;
+  display:grid;
+  grid-template-columns: 1fr 1fr 0.7fr;
+  gap:0;
+  padding:.7vh .9vw .5vh;
+  background:var(--gold-xlight);
+  width:100%;
+}
+
+/* GENEL PANEL */
+.col-panel {
+  background:#fff; border:.15vh solid var(--border); border-radius:1vh;
+  margin:.35vh; display:flex; flex-direction:column; overflow:hidden; flex:1; min-height:0;
+}
+.panel-header { padding:.4vh .9vw; display:flex; align-items:center; gap:.5vw; flex-shrink:0; }
+.panel-icon  { font-size:1.3vh; }
+.panel-title { font-size:1vh; font-weight:700; color:#fff; letter-spacing:.03vw; text-transform:uppercase; }
+
+/* TOGGLE */
+.toggle-bar { display:flex; gap:.35vw; padding:.32vh .45vw .28vh; border-bottom:.1vh solid var(--border); flex-shrink:0; }
+.toggle-btn { flex:1; padding:.3vh 0; border-radius:.5vh; border:.15vh solid var(--border); background:var(--gold-light); color:var(--text-mid); font-size:.78vh; font-weight:600; cursor:pointer; transition:all .2s; font-family:var(--font); }
+.toggle-btn.active { background:var(--gold-main); color:#fff; border-color:var(--gold-dark); }
+.toggle-btn:hover:not(.active) { background:#fff3cc; }
+
+/* BÖLME ETİKETİ */
+.half-label {
+  font-size:.72vh; font-weight:700; text-transform:uppercase; letter-spacing:.08vw;
+  text-align:center; padding:.22vh 0; flex-shrink:0;
+}
+.half-label.before { background:#fdecea; color:var(--red); border-bottom:.1vh solid #f5c0bc; }
+.half-label.after  { background:#eafaf1; color:var(--green); border-bottom:.1vh solid #b0e0c0; }
+
+/* DIVIDER */
+.half-divider { height:.12vh; background:var(--border); flex-shrink:0; }
+
+/* IMG GRID — 2 sütun 4 satır: sol=mevcut(b3), sağ=güçlendirilmiş(b5) */
+.img-grid {
+  flex:1; min-height:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr 1fr 1fr;
+  gap:.2vh .2vw;
+  padding:.22vh .28vw;
+  overflow:hidden;
+}
+
+/* IMG CELL */
+.img-cell { background:#fff; border-radius:.45vh; border:.1vh solid var(--border); overflow:hidden; display:flex; flex-direction:column; cursor:zoom-in; transition:transform .15s, border-color .15s; }
+.img-cell:hover { transform:scale(1.03); border-color:var(--gold-mid); }
+.img-cell-label { font-size:.63vh; font-weight:700; text-align:center; padding:.1vh .1vw; flex-shrink:0; }
+.img-cell-wrap  { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:.05vh .05vw; }
+.img-cell-wrap img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+
+/* ══ SAĞ KOLON — KARTLAR ══ */
+.right-col { display:flex; flex-direction:column; overflow:hidden; }
+
+.right-panel {
+  background:#fff; border:.15vh solid var(--border); border-radius:1vh;
+  margin:.35vh; display:flex; flex-direction:column; overflow:hidden;
+}
+
+/* Performans geçiş kartı */
+.perf-card { flex-shrink:0; }
+.perf-body { display:grid; grid-template-columns:1fr auto 1fr; }
+.perf-side { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:.65vh .4vw; gap:.2vh; }
+.perf-side.before { background:#fff0f0; }
+.perf-side.after  { background:#f0fff6; }
+.perf-side-lbl    { font-size:.68vh; font-weight:700; text-transform:uppercase; letter-spacing:.07vw; }
+.perf-side.before .perf-side-lbl { color:var(--red); }
+.perf-side.after  .perf-side-lbl { color:var(--green); }
+.perf-side-status { font-size:1.2vh; font-weight:800; text-align:center; line-height:1.2; }
+.perf-side.before .perf-side-status { color:var(--red); }
+.perf-side.after  .perf-side-status { color:var(--green); }
+.perf-side-sub    { font-size:.62vh; color:#aaa; text-align:center; }
+.perf-arrow       { display:flex; align-items:center; justify-content:center; background:var(--gold-light); padding:0 .4vw; font-size:1.8vh; color:var(--gold-mid); }
+
+/* Sayısal tablo */
+.num-panel { flex-shrink:0; }
+.cmp-table { width:100%; border-collapse:collapse; }
+.cmp-table th { font-size:.68vh; font-weight:700; text-transform:uppercase; letter-spacing:.05vw; padding:.28vh .4vw; }
+.cmp-table th.c-l { background:var(--gold-light); color:var(--gold-dark); text-align:left; }
+.cmp-table th.c-b { background:#fdecea; color:var(--red); text-align:center; }
+.cmp-table th.c-a { background:#eafaf1; color:var(--green); text-align:center; }
+.cmp-table td     { font-size:.72vh; padding:.24vh .4vw; border-top:.08vh solid #f0e8c0; }
+.cmp-table td.c-l { font-weight:600; color:var(--text-dark); }
+.cmp-table td.c-b { text-align:center; color:var(--red); font-weight:600; background:#fff8f8; }
+.cmp-table td.c-a { text-align:center; color:var(--green); font-weight:600; background:#f8fff8; }
+
+/* Öneriler */
+.oneri-panel { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+.oneri-body  { flex:1; min-height:0; padding:.4vh .6vw; display:flex; flex-direction:column; gap:.28vh; overflow:hidden; }
+.oneri-sec-title { font-size:.7vh; font-weight:700; color:var(--gold-dark); text-transform:uppercase; letter-spacing:.1vw; border-left:.3vw solid var(--gold-bright); padding-left:.4vw; flex-shrink:0; }
+.oneri-item { display:flex; align-items:flex-start; gap:.3vw; flex-shrink:0; }
+.oneri-icon { font-size:.88vh; flex-shrink:0; }
+.oneri-text { font-size:.7vh; color:var(--text-mid); line-height:1.4; }
+
+/* FOOTER */
+.poster-footer { background:var(--gold-dark); display:flex; align-items:center; justify-content:space-between; padding:.65vh 3vw; flex-shrink:0; width:100%; }
+.footer-left { font-size:1.05vh; color:rgba(255,255,255,.75); }
+.nav-dots { display:flex; gap:.6vw; align-items:center; }
+.nav-dot { width:1.4vh; height:1.4vh; border-radius:50%; background:rgba(255,255,255,.3); display:inline-block; transition:background .2s; text-decoration:none; }
+.nav-dot:hover  { background:rgba(255,255,255,.65); }
+.nav-dot.active { background:#fff; }
+</style>
+</head>
+<body>
+
+<div class="poster" id="poster">
+
+  <div class="header">
+    <div class="header-logo"><img src="images/logo.png" alt="BAÜ Logo"></div>
+    <div class="header-center">
+      <div class="header-inst">Balıkesir Üniversitesi</div>
+      <div class="header-dept">Mühendislik Fakültesi — İnşaat Mühendisliği Bölümü</div>
+      <span class="header-type">Lisans Bitirme Çalışması</span>
+    </div>
+    <div class="header-spacer"></div>
+  </div>
+
+  <div class="section-header">
+    <span class="sec-badge">Bölüm 06 / 06</span>
+    <span class="sec-title-main">Sonuçlar &amp; Öneriler</span>
+    <span class="sec-subtitle">Pushover Karşılaştırması · Hasar Dağılımları · Performans Değerlendirmesi</span>
+  </div>
+
+  <div class="content">
+
+    <!-- ══ SOL — PUSHOVER EĞRİLERİ ══ -->
+    <div style="display:flex;flex-direction:column;overflow:hidden;">
+      <div class="col-panel">
+        <div class="panel-header" style="background:var(--gold-dark);">
+          <span class="panel-icon">📊</span>
+          <span class="panel-title">Pushover Eğrileri — Önce / Sonra</span>
+        </div>
+        <!-- toggle: X/Y + Push/Modal -->
+        <div class="toggle-bar" style="background:var(--gold-light);">
+          <button class="toggle-btn active" id="btn-x"     onclick="setXY('x')">X Doğrultusu</button>
+          <button class="toggle-btn"        id="btn-y"     onclick="setXY('y')">Y Doğrultusu</button>
+          <button class="toggle-btn active" id="btn-push"  onclick="setMode('push')"  style="margin-left:.4vw;">Pushover</button>
+          <button class="toggle-btn"        id="btn-modal" onclick="setMode('modal')">Modal</button>
+        </div>
+
+        <!-- Sütun başlıkları -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;flex-shrink:0;">
+          <div class="half-label before" style="border-right:.1vh solid #f5c0bc;">⚠ Mevcut Yapı</div>
+          <div class="half-label after">✅ Güçlendirilmiş</div>
+        </div>
+        <!-- Tek birleşik grid: her satır = bir kombinasyon, sol=b3 sağ=b5 -->
+        <div class="img-grid" id="push-grid"></div>
+      </div>
+    </div>
+
+    <!-- ══ ORTA — HASAR DAĞILIMLARI ══ -->
+    <div style="display:flex;flex-direction:column;overflow:hidden;">
+      <div class="col-panel">
+        <div class="panel-header" style="background:var(--gold-mid);">
+          <span class="panel-icon">🔴</span>
+          <span class="panel-title">Hasar Dağılımları — Önce / Sonra</span>
+        </div>
+        <!-- toggle: Düşey/Kiriş -->
+        <div class="toggle-bar" style="background:var(--gold-light);">
+          <button class="toggle-btn active" id="btn-dusev" onclick="setHasar('dusev')">🏛 Düşey Elemanlar</button>
+          <button class="toggle-btn"        id="btn-kirs"  onclick="setHasar('kirs')">━ Kiriş Elemanlar</button>
+        </div>
+
+        <!-- Sütun başlıkları -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;flex-shrink:0;">
+          <div class="half-label before" style="border-right:.1vh solid #f5c0bc;">⚠ Mevcut Yapı</div>
+          <div class="half-label after" id="hasar-after-label">✅ Güçlendirilmiş</div>
+        </div>
+        <!-- Tek birleşik grid -->
+        <div class="img-grid" id="hasar-grid"></div>
+      </div>
+    </div>
+
+    <!-- ══ SAĞ — KARTLAR ══ -->
+    <div class="right-col">
+
+      <!-- Performans geçişi -->
+      <div class="right-panel perf-card">
+        <div class="panel-header" style="background:var(--gold-dark);">
+          <span class="panel-icon">🏆</span>
+          <span class="panel-title">DD-2 Performans Sonucu</span>
+        </div>
+        <div class="perf-body">
+          <div class="perf-side before">
+            <div class="perf-side-lbl">Mevcut</div>
+            <div class="perf-side-status">GÖÇME<br>DURUMU</div>
+            <div class="perf-side-sub">GÖ sınırı aşıldı</div>
+          </div>
+          <div class="perf-arrow">→</div>
+          <div class="perf-side after">
+            <div class="perf-side-lbl">Güçlendirilmiş</div>
+            <div class="perf-side-status">KONTROLLÜ<br>HASAR ✓</div>
+            <div class="perf-side-sub">Hedef sağlandı</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sayısal özet -->
+      <div class="right-panel num-panel">
+        <div class="panel-header" style="background:var(--gold-mid);">
+          <span class="panel-icon">📋</span>
+          <span class="panel-title">Sayısal Karşılaştırma</span>
+        </div>
+        <table class="cmp-table">
+          <thead>
+            <tr><th class="c-l">Parametre</th><th class="c-b">Mevcut</th><th class="c-a">Güçl.</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="c-l">T₁ — X Periyodu</td><td class="c-b">0.72 s</td><td class="c-a">0.70 s</td></tr>
+            <tr><td class="c-l">T₂ — Y Periyodu</td><td class="c-b">0.57 s</td><td class="c-a">0.54 s</td></tr>
+            <tr><td class="c-l">V<sub>x</sub> maks.</td><td class="c-b">3 172 kN</td><td class="c-a">3 496 kN</td></tr>
+            <tr><td class="c-l">V<sub>y</sub> maks.</td><td class="c-b">3 818 kN</td><td class="c-a">4 105 kN</td></tr>
+            <tr><td class="c-l">δ<sub>x</sub> talep</td><td class="c-b">0.094 m</td><td class="c-a">0.090 m</td></tr>
+            <tr><td class="c-l">GB Eleman</td><td class="c-b">Var</td><td class="c-a">Yok ✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Öneriler -->
+      <div class="right-panel oneri-panel">
+        <div class="panel-header" style="background:var(--gold-dark);">
+          <span class="panel-icon">📌</span>
+          <span class="panel-title">Uygulama Önerileri</span>
+        </div>
+        <div class="toggle-bar" style="background:var(--gold-light);">
+          <button class="toggle-btn active" id="btn-o1" onclick="setOneri(1)">🔧 Uygulama</button>
+          <button class="toggle-btn"        id="btn-o2" onclick="setOneri(2)">🔍 Kalite</button>
+          <button class="toggle-btn"        id="btn-o3" onclick="setOneri(3)">🛡 İzleme</button>
+        </div>
+        <div class="oneri-body" id="oneri-body"></div>
+      </div>
+
+    </div><!-- /right-col -->
+
+  </div><!-- /content -->
+
+  <div class="poster-footer">
+    <div class="footer-left">
+      <strong>Serhat Kayar</strong> &nbsp;·&nbsp; Danışman: Dr. Öğr. Üyesi Erkan Töre &nbsp;·&nbsp; Balıkesir Üniversitesi &nbsp;·&nbsp; 10 Haziran 2026
+    </div>
+    <div class="nav-dots">
+      <a class="nav-dot" href="poster_anasayfa.html"></a>
+      <a class="nav-dot" href="poster_b1.html"></a>
+      <a class="nav-dot" href="poster_b2.html"></a>
+      <a class="nav-dot" href="poster_b3.html"></a>
+      <a class="nav-dot" href="poster_b4.html"></a>
+      <a class="nav-dot" href="poster_b5.html"></a>
+      <a class="nav-dot active" href="poster_b6.html"></a>
+    </div>
+  </div>
+
+</div>
+
+<div id="lb" onclick="closeLB()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out;">
+  <img id="lb-img" style="max-width:92vw;max-height:92vh;border-radius:8px;">
+</div>
+
+<button class="fs-btn" onclick="toggleFS()">⛶</button>
+<a class="back-btn" href="poster_anasayfa.html">← Ana Sayfa</a>
+
+<script>
+/* FİT */
+function fitPoster() {
+  var vw = document.fullscreenElement ? screen.width  : window.innerWidth;
+  var vh = document.fullscreenElement ? screen.height : window.innerHeight;
+  var size = Math.min(vw, vh);
+  var p = document.getElementById('poster');
+  p.style.width  = size + 'px';
+  p.style.height = size + 'px';
+  p.style.left   = ((vw - size) / 2) + 'px';
+  p.style.top    = ((vh - size) / 2) + 'px';
+}
+fitPoster();
+window.addEventListener('resize', fitPoster);
+if (window.visualViewport) window.visualViewport.addEventListener('resize', fitPoster);
+function toggleFS() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen({ navigationUI:'hide' }).catch(function(){});
+  else document.exitFullscreen();
+}
+document.addEventListener('fullscreenchange', function(){ setTimeout(fitPoster, 80); });
+document.addEventListener('keydown', function(e){ if(e.key==='F11'){ e.preventDefault(); toggleFS(); } });
+
+/* LİGHTBOX */
+function openLB(src){ document.getElementById('lb-img').src=src; document.getElementById('lb').style.display='flex'; }
+function closeLB()  { document.getElementById('lb').style.display='none'; }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLB(); });
+
+/*
+  B3 Pushover : b-3-7..14  (offset 7)   — X: 0-3, Y: 4-7
+  B3 Modal    : b-3-15..22 (offset 15)
+  B5 Pushover : b-5-7..14  (offset 7)
+  B5 Modal    : b-5-15..22 (offset 15)
+  B3 Hasar düşey : b-3-23..30  X:0-3, Y:4-7
+  B3 Hasar kiriş : b-3-31..38
+  B5 Hasar düşey : b-5-23..30
+  B5 Hasar kiriş : b-5-31..38
+*/
+var LABELS = ['+X+0.3Y','+X−0.3Y','−X+0.3Y','−X−0.3Y','+Y+0.3X','+Y−0.3X','−Y+0.3X','−Y−0.3X'];
+
+var curXY    = 'x';
+var curMode  = 'push';
+var curHasar = 'dusev';
+
+/* Her satır: b3 hücresi + b5 hücresi — 4 satır = 8 hücre toplam */
+function buildPairedGrid(gridId, folderB3, folderB5, offset, xyStart) {
+  var grid = document.getElementById(gridId);
+  grid.innerHTML = '';
+  for (var i = 0; i < 4; i++) {
+    var idx = offset + xyStart + i;
+    var lbl = LABELS[xyStart + i];
+
+    // B3 hücresi (mevcut — sol)
+    var srcB3  = 'images/' + folderB3 + idx + '.PNG';
+    var cellB3 = document.createElement('div');
+    cellB3.className = 'img-cell';
+    cellB3.innerHTML =
+      '<div class="img-cell-label" style="background:rgba(192,57,43,.08);color:#7b1a1a">' + lbl + '</div>' +
+      '<div class="img-cell-wrap"><img src="' + srcB3 + '" alt="' + lbl + '"></div>';
+    (function(s){ cellB3.addEventListener('click', function(){ openLB(s); }); })(srcB3);
+    grid.appendChild(cellB3);
+
+    // B5 hücresi (güçlendirilmiş — sağ)
+    var srcB5  = 'images/' + folderB5 + idx + '.PNG';
+    var cellB5 = document.createElement('div');
+    cellB5.className = 'img-cell';
+    cellB5.innerHTML =
+      '<div class="img-cell-label" style="background:rgba(30,132,73,.08);color:#0d4a0d">' + lbl + '</div>' +
+      '<div class="img-cell-wrap"><img src="' + srcB5 + '" alt="' + lbl + '"></div>';
+    (function(s){ cellB5.addEventListener('click', function(){ openLB(s); }); })(srcB5);
+    grid.appendChild(cellB5);
+  }
+}
+
+function rebuildPush() {
+  var base  = (curMode === 'push') ? 7 : 15;
+  var start = (curXY === 'x') ? 0 : 4;
+  buildPairedGrid('push-grid', 'b-3-', 'b-5-', base, start);
+}
+
+function rebuildHasar() {
+  var base  = (curHasar === 'dusev') ? 23 : 31;
+  var start = (curXY === 'x') ? 0 : 4;
+  buildPairedGrid('hasar-grid', 'b-3-', 'b-5-', base, start);
+}
+
+function setXY(dir) {
+  curXY = dir;
+  document.getElementById('btn-x').classList.toggle('active', dir === 'x');
+  document.getElementById('btn-y').classList.toggle('active', dir === 'y');
+  rebuildPush();
+  rebuildHasar();
+}
+
+function setMode(mode) {
+  curMode = mode;
+  document.getElementById('btn-push').classList.toggle('active',  mode === 'push');
+  document.getElementById('btn-modal').classList.toggle('active', mode === 'modal');
+  rebuildPush();
+}
+
+function setHasar(type) {
+  curHasar = type;
+  document.getElementById('btn-dusev').classList.toggle('active', type === 'dusev');
+  document.getElementById('btn-kirs').classList.toggle('active',  type === 'kirs');
+  rebuildHasar();
+}
+
+/* ÖNERİLER */
+var oneriData = {
+  1: { baslik:'Uygulama Aşaması', maddeler:[
+    {icon:'🏗', text:'Güçlendirme uygulaması onaylı uygulama projelerine uygun gerçekleştirilmelidir.'},
+    {icon:'🔩', text:'Çelik imalat ve montaj işleri TSE belgeli firmalar tarafından yapılmalıdır.'},
+    {icon:'🧵', text:'KLP uygulaması üretici firma teknik şartnamesine uygun gerçekleştirilmelidir.'},
+    {icon:'⛏',  text:'Ankraj delikleri mevcut donatıya zarar vermeyecek şekilde açılmalıdır.'},
+    {icon:'🧱', text:'Beton onarım işlemleri standartlara uygun malzemelerle yapılmalıdır.'}
+  ]},
+  2: { baslik:'Kalite Kontrol', maddeler:[
+    {icon:'🔧', text:'Cıvata bağlantılarının sıkma torkları kontrol edilmelidir.'},
+    {icon:'🧪', text:'KLP uygulaması sonrası yapışma testleri (pull-off) yapılmalıdır.'},
+    {icon:'⚓', text:'Ankraj kapasiteleri yerinde çekme testleri ile doğrulanmalıdır.'},
+    {icon:'📸', text:'İmalat ve montaj aşamalarında fotoğraflı belgelendirme yapılmalıdır.'},
+    {icon:'👷', text:'Tüm aşamalarda yetkin teknik personel gözetimi sağlanmalıdır.'}
+  ]},
+  3: { baslik:'Bakım ve İzleme', maddeler:[
+    {icon:'🔁', text:'Güçlendirme sonrası periyodik yapısal kontroller yapılmalıdır.'},
+    {icon:'🌍', text:'Olası depremler sonrası yapısal elemanlarda hasar kontrolü gerçekleştirilmelidir.'},
+    {icon:'☀️', text:'KLP yüzeylerinin UV ve çevresel etkilerden korunması sağlanmalıdır.'},
+    {icon:'🔴', text:'Çelik elemanların korozyon koruması düzenli olarak kontrol edilmelidir.'},
+    {icon:'🗃', text:'Uygulama sonrası as-built çizimler arşivlenmelidir.'}
+  ]}
+};
+
+function setOneri(n) {
+  [1,2,3].forEach(function(i){
+    document.getElementById('btn-o'+i).classList.toggle('active', i===n);
+  });
+  var d = oneriData[n];
+  var html = '<div class="oneri-sec-title">' + d.baslik + '</div>';
+  d.maddeler.forEach(function(m){
+    html += '<div class="oneri-item"><span class="oneri-icon">' + m.icon + '</span><span class="oneri-text">' + m.text + '</span></div>';
+  });
+  document.getElementById('oneri-body').innerHTML = html;
+}
+
+/* BAŞLANGIÇ */
+rebuildPush();
+rebuildHasar();
+setOneri(1);
+</script>
+
+</body>
+</html>

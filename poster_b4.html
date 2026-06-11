@@ -776,7 +776,7 @@ function setSapMode(mode) {
   ['static','model','kapasite','anim'].forEach(function(m) {
     document.getElementById('btn-' + m).classList.toggle('active', m === mode);
   });
-  var src = { static: 'images/b-4-6.PNG', model: 'images/b-4-20.PNG', kapasite: 'images/b-4-21.PNG', anim: 'gif/b-4-1.gif' };
+  var src = { static: 'images/b-4-6.png', model: 'images/b-4-20.PNG', kapasite: 'images/b-4-21.PNG', anim: 'gif/b-4-1.gif' };
   document.getElementById('sap-main-img').src = src[mode];
 }
 

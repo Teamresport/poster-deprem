@@ -107,8 +107,6 @@ html, body {
 
 /* ════════════════════════════
    CONTENT GRID
-   Sol: 1fr | Orta: 1.65fr | Sağ: 1fr
-   Her sütun kendi içinde 2 satır
 ════════════════════════════ */
 .content {
   flex: 1; min-height: 0;
@@ -129,24 +127,24 @@ html, body {
   margin: .5vh;
   display: flex; flex-direction: column;
   overflow: hidden;
+  min-height: 0;
 }
 .panel-header {
   background: var(--teal-main);
-  padding: .65vh 1.1vw;
+  padding: .55vh 1.1vw;
   display: flex; align-items: center; gap: .5vw;
   flex-shrink: 0;
 }
-.panel-icon  { font-size: 1.5vh; }
-.panel-title { font-size: 1.15vh; font-weight: 700; color: #fff; letter-spacing: .03vw; text-transform: uppercase; }
-.panel-body  { flex: 1; overflow: hidden; padding: .8vh 1vw; display: flex; flex-direction: column; }
+.panel-icon  { font-size: 1.4vh; }
+.panel-title { font-size: 1.05vh; font-weight: 700; color: #fff; letter-spacing: .03vw; text-transform: uppercase; }
+.panel-body  { flex: 1; overflow: hidden; padding: .6vh .9vw; display: flex; flex-direction: column; min-height: 0; }
 
 .panel.accent-1 .panel-header { background: var(--teal-dark); }
 .panel.accent-2 .panel-header { background: var(--teal-mid); }
 .panel.accent-3 .panel-header { background: #1a6b6b; }
 
 /* ════════════════════════════
-   ORTA ÜSTTE: 5 KAT PLANI
-   grid-column: 2, grid-row: 1
+   ORTA: KAT PLANLARI PANELİ
 ════════════════════════════ */
 .plans-panel {
   grid-column: 2;
@@ -158,8 +156,9 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 0;
 }
-.plans-panel .panel-header { background: var(--teal-dark); padding: .65vh 1.1vw; display: flex; align-items: center; gap: .5vw; flex-shrink: 0; }
+.plans-panel .panel-header { background: var(--teal-dark); padding: .55vh 1.1vw; display: flex; align-items: center; gap: .5vw; flex-shrink: 0; }
 .plans-row {
   flex: 1;
   display: flex;
@@ -168,9 +167,9 @@ html, body {
   padding: .3vh .3vw;
   overflow: hidden;
   background: #fff;
+  min-height: 0;
 }
 
-/* Her bir kat planı kutusu */
 .plan-cell {
   flex: 1;
   display: flex;
@@ -178,15 +177,14 @@ html, body {
   align-items: center;
   margin: 0 .25vw;
   overflow: hidden;
+  min-height: 0;
 }
 .plan-label {
-  font-size: .95vh; font-weight: 700; color: var(--teal-dark);
-  text-align: center; margin-bottom: .3vh;
+  font-size: .9vh; font-weight: 700; color: var(--teal-dark);
+  text-align: center; margin-bottom: .25vh;
   letter-spacing: .02vw; text-transform: uppercase;
   flex-shrink: 0;
 }
-
-
 .plan-img-wrap {
   flex: 1;
   width: 100%;
@@ -195,20 +193,11 @@ html, body {
   overflow: hidden;
   background: #fff;
   display: flex; align-items: center; justify-content: center;
+  min-height: 0;
 }
-.plan-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: .4vh;
-  color: var(--text-soft);
-}
-.plan-placeholder .pp-icon { font-size: 2.2vh; opacity: .5; }
-.plan-placeholder .pp-txt  { font-size: .85vh; opacity: .6; text-align: center; }
 
 /* ════════════════════════════
-   ORTA ALTTA: KESİT + FOTO
-   grid-column: 2, grid-row: 2
+   ORTA ALT: GÖRÜNÜŞLER PANELİ
 ════════════════════════════ */
 .views-panel {
   grid-column: 2;
@@ -220,8 +209,9 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 0;
 }
-.views-panel .panel-header { background: #1a6b6b; padding: .65vh 1.1vw; display: flex; align-items: center; gap: .5vw; flex-shrink: 0; }
+.views-panel .panel-header { background: #1a6b6b; padding: .55vh 1.1vw; display: flex; align-items: center; gap: .5vw; flex-shrink: 0; }
 .views-row {
   flex: 1;
   display: flex;
@@ -230,9 +220,8 @@ html, body {
   padding: .3vh .3vw;
   overflow: hidden;
   background: #fff;
+  min-height: 0;
 }
-
-/* Kesit hücreleri — eşit 3'e bölünür (kesit-1, kesit-2, foto) */
 .view-cell {
   flex: 1;
   display: flex;
@@ -240,15 +229,14 @@ html, body {
   align-items: center;
   margin: 0 .3vw;
   overflow: hidden;
+  min-height: 0;
 }
 .view-label {
-  font-size: .95vh; font-weight: 700; color: var(--teal-dark);
-  text-align: center; margin-bottom: .3vh;
+  font-size: .9vh; font-weight: 700; color: var(--teal-dark);
+  text-align: center; margin-bottom: .25vh;
   letter-spacing: .02vw; text-transform: uppercase;
   flex-shrink: 0;
 }
-
-
 .view-img-wrap {
   flex: 1;
   width: 100%;
@@ -257,83 +245,49 @@ html, body {
   overflow: hidden;
   background: #fff;
   display: flex; align-items: center; justify-content: center;
+  min-height: 0;
 }
-.view-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: .4vh;
-  color: var(--text-soft);
-}
-.view-placeholder .vp-icon { font-size: 2.4vh; opacity: .45; }
-.view-placeholder .vp-txt  { font-size: .85vh; opacity: .6; text-align: center; line-height: 1.4; }
 
 /* ── BİNA KİMLİK TABLOSU ── */
 .kimlik-table { width: 100%; border-collapse: collapse; }
 .kimlik-table tr { border-bottom: .1vh solid var(--teal-light); }
 .kimlik-table tr:last-child { border-bottom: none; }
-.kimlik-table td { padding: .5vh .4vw; font-size: 1.1vh; line-height: 1.4; vertical-align: top; }
+.kimlik-table td { padding: .38vh .35vw; font-size: 1.15vh; line-height: 1.35; vertical-align: top; }
 .kimlik-table td:first-child {
   font-weight: 700; color: var(--teal-dark); width: 42%;
-  font-size: 1.0vh; text-transform: uppercase; letter-spacing: .03vw; white-space: nowrap;
+  font-size: 1.1vh; text-transform: uppercase; letter-spacing: .02vw; white-space: nowrap;
 }
 .kimlik-table td:last-child { color: var(--text-mid); font-weight: 500; }
-
-/* ── TBDY BADGE ── */
-.tbdy-block {
-  margin-top: auto; padding-top: .7vh;
-  background: var(--teal-dark);
-  border-radius: .7vh;
-  padding: .65vh .9vw;
-  display: flex; align-items: center; gap: .7vw;
-  flex-shrink: 0;
-}
-.tbdy-badge { font-size: 1.45vh; font-weight: 800; color: var(--teal-bright); white-space: nowrap; line-height: 1; }
-.tbdy-desc  { font-size: .95vh; color: rgba(255,255,255,.78); line-height: 1.4; }
 
 /* ── TEKNİK PARAMETRE SATIRLARI ── */
 .param-row {
   display: flex; align-items: flex-start; gap: .5vw;
-  padding: .48vh 0;
+  padding: .32vh 0;
   border-bottom: .1vh solid var(--teal-light);
 }
 .param-row:last-child { border-bottom: none; }
 .param-label {
   font-weight: 700; color: var(--teal-dark); text-transform: uppercase;
-  font-size: .95vh; letter-spacing: .02vw; white-space: nowrap; min-width: 8vw;
+  font-size: 1.2vh; letter-spacing: .02vw; white-space: nowrap; min-width: 7.5vw;
+  flex-shrink: 0;
 }
-.param-val { color: var(--text-mid); font-size: 1.05vh; line-height: 1.45; }
+.param-val { color: var(--text-mid); font-size: 1.2vh; line-height: 1.35; }
 .param-val strong { color: var(--teal-dark); }
 
 /* ── AMAÇ MADDE LİSTESİ ── */
-.bullet-list { list-style: none; flex: 1; }
+.bullet-list { list-style: none; flex: 1; overflow: hidden; }
 .bullet-list li {
-  font-size: 1.05vh; color: var(--text-mid); line-height: 1.5;
-  padding: .4vh 0 .4vh 1.3vw; position: relative;
+  font-size: 1.1vh; color: var(--text-mid); line-height: 1.4;
+  padding: .45vh 0 .28vh 1.2vw; position: relative;
   border-bottom: .1vh solid var(--teal-light);
 }
 .bullet-list li:last-child { border-bottom: none; }
 .bullet-list li::before {
-  content: ''; position: absolute; left: .3vw; top: .85vh;
-  width: .5vh; height: .5vh; border-radius: 50%;
+  content: ''; position: absolute; left: .3vw; top: .72vh;
+  width: .45vh; height: .45vh; border-radius: 50%;
   background: var(--teal-bright);
 }
 .bullet-list li strong { color: var(--teal-dark); font-weight: 700; }
-
-/* ── ÇALIŞMA KAPSAMI ── */
-.kapsam-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: .45vh .45vw; flex: 1;
-}
-.kapsam-item {
-  background: var(--teal-xlight);
-  border: .15vh solid var(--border);
-  border-radius: .6vh;
-  padding: .5vh .65vw;
-  display: flex; align-items: center; gap: .4vw;
-}
-.kapsam-item .ki-icon { font-size: 1.4vh; flex-shrink: 0; }
-.kapsam-item .ki-text { font-size: .95vh; color: var(--text-mid); line-height: 1.35; font-weight: 500; }
 
 /* ── FOOTER ── */
 .poster-footer {
@@ -387,14 +341,66 @@ html, body {
     <span class="sec-subtitle">Bina Tanımı · Mimari Planlar · Teknik Parametreler</span>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════
-       İÇERİK ALANI
-  ═══════════════════════════════════════════════════════ -->
   <div class="content">
 
-    <!-- ─────────────────────────────
-         SOL ÜST: Bina Kimliği
-    ────────────────────────────── -->
+    <!-- SOL ÜST: Çalışmanın Amacı -->
+    <div class="panel accent-2" style="grid-column:1; grid-row:1;">  
+      <div class="panel-header">
+        <span class="panel-icon">🎯</span>
+        <span class="panel-title">Çalışmanın Amacı</span>
+      </div>
+      <div class="panel-body" style="gap:.3vh;">
+        <p style="font-size:1.1vh;color:var(--text-mid);line-height:1.45;margin-bottom:.35vh;flex-shrink:0;">
+          Bu çalışma; mevcut bir konut binasının <strong>TBDY 2018 Bölüm 15</strong> kapsamında deprem performansının değerlendirilmesini ve <strong>yenilikçi güçlendirme yöntemleriyle</strong> sismik performansının iyileştirilmesini amaçlamaktadır. Bu doğrultuda;
+        </p>
+        <ul class="bullet-list">
+          <li><strong>DD-2 deprem düzeyi</strong> (50 yılda %10 aşılma) için <strong>Kontrollü Hasar (KH)</strong> performans hedefinin sağlanıp sağlanmadığının araştırılması</li>
+          <li><strong>Doğrusal olmayan Tek Modlu Statik İtme analizi</strong> ile yapısal davranışın davranışı, hasar mekanizmalarının ve kritik elemanların tespiti</li>
+          <li><strong>BRB (Burkulması Önlenmiş Çelik Çapraz)</strong> ve <strong>KLP (Kolon Lifli Polimer) Sargılama</strong> yenilikçi yöntemleriyle sismik güçlendirme tasarımının geliştirilmesi</li>
+          <li>Güçlendirme sonrası yapının <strong>deprem performansını</strong> değerlendirmesi</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ORTA: Kat Planları (grid-column:2, grid-row:1/3) -->
+    <div class="plans-panel">
+      <div class="panel-header">
+        <span class="panel-icon">📐</span>
+        <span class="panel-title" style="color:#fff;">Kat Planları</span>
+      </div>
+      <div style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;">
+        <div class="plans-row">
+          <div class="plan-cell">
+            <div class="plan-label">Bodrum Kat</div>
+            <div class="plan-img-wrap"><img src="images/b-1-1.PNG" alt="Bodrum Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
+          </div>
+          <div class="plan-cell">
+            <div class="plan-label">Zemin Kat</div>
+            <div class="plan-img-wrap"><img src="images/b-1-2.PNG" alt="Zemin Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
+          </div>
+          <div class="plan-cell">
+            <div class="plan-label">1. Normal Kat</div>
+            <div class="plan-img-wrap"><img src="images/b-1-3.PNG" alt="1. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
+          </div>
+        </div>
+        <div class="plans-row">
+          <div class="plan-cell">
+            <div class="plan-label">2. Normal Kat</div>
+            <div class="plan-img-wrap"><img src="images/b-1-4.PNG" alt="2. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
+          </div>
+          <div class="plan-cell">
+            <div class="plan-label">3. Normal Kat</div>
+            <div class="plan-img-wrap"><img src="images/b-1-5.PNG" alt="3. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
+          </div>
+          <div class="plan-cell">
+            <div class="plan-label">Çatı Katı</div>
+            <div class="plan-img-wrap"><img src="images/b-1-6.PNG" alt="Çatı Katı Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOL ORTA: Bina Bilgileri -->
     <div class="panel accent-1" style="grid-column:1; grid-row:2;">
       <div class="panel-header">
         <span class="panel-icon">🏛</span>
@@ -409,77 +415,13 @@ html, body {
           <tr><td>Bina Yüksekliği</td> <td><strong>15.12 m</strong> (zemin tabanından çatıya)</td></tr>
           <tr><td>İnşaat Alanı</td>    <td><strong>865.90 m²</strong></td></tr>
           <tr><td>Plan Boyutları</td>  <td>X: 8.00 m &nbsp;/&nbsp; Y: 17.20 m</td></tr>
-          <tr><td>Malzeme Kalitesi</td>    <td>C20/S420</td></tr>
+          <tr><td>Malzeme Kalitesi</td><td>C20/S420</td></tr>
         </table>
       </div>
     </div>
 
-    <!-- ─────────────────────────────────────────────────────
-         ORTA ÜST: 5 KAT PLANI (grid-column:2, grid-row:1)
-    ────────────────────────────────────────────────────── -->
-    <div class="plans-panel">
-      <div class="panel-header">
-        <span class="panel-icon">📐</span>
-        <span class="panel-title" style="color:#fff;">Kat Planları</span>
-      </div>
-      <div style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
-      <div class="plans-row">
-        <div class="plan-cell">
-          <div class="plan-label">Bodrum Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-1.PNG" alt="Bodrum Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
-        </div>
-        <div class="plan-cell">
-          <div class="plan-label">Zemin Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-2.PNG" alt="Zemin Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
-        </div>
-        <div class="plan-cell">
-          <div class="plan-label">1. Normal Kat</div>
-          <div class="plan-img-wrap"><img src="images/b-1-3.PNG" alt="1. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
-        </div>
-        
-        </div><!-- /plans-row 1 -->
-        <div class="plans-row">
-          <div class="plan-cell">
-            <div class="plan-label">2. Normal Kat</div>
-            <div class="plan-img-wrap"><img src="images/b-1-4.PNG" alt="2. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
-          </div>
-          <div class="plan-cell">
-            <div class="plan-label">3. Normal Kat</div>
-            <div class="plan-img-wrap"><img src="images/b-1-5.PNG" alt="3. Normal Kat Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
-          </div>
-          <div class="plan-cell">
-            <div class="plan-label">Çatı Katı</div>
-            <div class="plan-img-wrap"><img src="images/b-1-6.PNG" alt="Çatı Katı Planı" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
-          </div>
-        </div><!-- /plans-row 2 -->
-      </div><!-- /plans-wrap -->
-    </div><!-- /plans-panel -->
-
-    <!-- ─────────────────────────────
-         SAĞ ÜST: Çalışmanın Amacı
-    ────────────────────────────── -->
-    <div class="panel accent-2" style="grid-column:1; grid-row:1;">  
-      <div class="panel-header">
-        <span class="panel-icon">🎯</span>
-        <span class="panel-title">Çalışmanın Amacı</span>
-      </div>
-      <div class="panel-body" style="gap:.4vh;">
-        <p style="font-size:1.05vh;color:var(--text-mid);line-height:1.55;margin-bottom:.5vh;">
-          Bu çalışma; mevcut bir konut binasının <strong>TBDY 2018 Bölüm 15</strong> kapsamında deprem performansının değerlendirilmesini ve <strong>yenilikçi güçlendirme yöntemleriyle</strong> sismik performansının iyileştirilmesini amaçlamaktadır.Bu doğrutuda;
-        </p>
-        <ul class="bullet-list" style="gap:.35vh;">
-          <li><strong>DD-2 deprem düzeyi</strong> (50 yılda %10 aşılma) için <strong>Kontrollü Hasar (KH)</strong> performans hedefinin sağlanıp sağlanmadığının araştırılması</li>
-          <li><strong>Doğrusal olmayan Tek Modlu Statik İtme analizi</strong> ile yapısal davranışın davranışı, hasar mekanizmalarının ve kritik elemanların tespiti</li>
-          <li><strong>BRB (Burkulması Önlenmiş Çelik Çapraz)</strong> ve <strong>KLP (Kolon Lifli Polimer) Sargılama </strong> yenilikçi yöntemleriyle sismik güçlendirme tasarımının geliştirilmesi</li>
-          <li>Güçlendirme sonrası yapının <strong>deprem performansını</strong> değerlendirmesi</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ─────────────────────────────
-         SOL ALT: Teknik Parametreler
-    ────────────────────────────── -->
-    <div class="panel accent-3">
+    <!-- SOL ALT: Teknik Parametreler -->
+    <div class="panel accent-3" style="grid-column:1; grid-row:3;">
       <div class="panel-header">
         <span class="panel-icon">⚙️</span>
         <span class="panel-title">Teknik Parametreler</span>
@@ -510,16 +452,13 @@ html, body {
           <span class="param-val">Doğrusal Olmayan Tek Modlu İtme (Pushover) Yöntemi</span>
         </div>
         <div class="param-row">
-          <span class="param-label">Yazılım & Modelleme Yaklaşımı</span>
-          <span class="param-val">SeismoStruct —  Yayılı Plastisite & Kesit Hücresi Modeli </span>
+          <span class="param-label">Yazılım & Modelleme</span>
+          <span class="param-val">SeismoStruct — Yayılı Plastisite & Kesit Hücresi Modeli</span>
         </div>
-        
       </div>
     </div>
 
-    <!-- ───────────────────────────────────────────────────────
-         ORTA ALT: 2 KESİT + CEPHE FOTO (grid-column:2, grid-row:2)
-    ──────────────────────────────────────────────────────── -->
+    <!-- ORTA ALT: Görünüşler (grid-column:2, grid-row:3) -->
     <div class="views-panel">
       <div class="panel-header">
         <span class="panel-icon">✂️</span>
@@ -535,12 +474,11 @@ html, body {
           <div class="view-img-wrap"><img src="images/b-1-8.PNG" alt="Ön Görünüş" style="width:100%;height:100%;object-fit:contain;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
         <div class="view-cell">
-          <div class="view-label">Cephe Görünüş</div>
+          <div class="view-label">Kesit Görünüş</div>
           <div class="view-img-wrap"><img src="images/b-1-9.PNG" alt="Cephe Görünüş" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;" onclick="document.getElementById('lb-img').src=this.src;document.getElementById('lb').style.display='flex'"></div>
         </div>
-      </div><!-- /views-row -->
-    </div><!-- /views-panel -->
-
+      </div>
+    </div>
 
   </div><!-- /content -->
 
